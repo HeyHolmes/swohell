@@ -1,18 +1,25 @@
 {
   "status": {
-    "headline": "Stop Work Order Active Since Feb 17, 2026",
+    "headline": "🎉 SWO Re-Inspection FRIDAY April 10, 8–10 AM",
     "swoDate": "2026-02-17",
-    "nextDeadline": "Apr 18",
-    "nextDeadlineLabel": "60-day compliance"
+    "nextDeadline": "Apr 10",
+    "nextDeadlineLabel": "Re-inspection"
   },
 
   "nextAction": {
-    "title": "Go to 280 Broadway in person",
-    "detail": "Bring deed + government ID to push COC review for construction violation (39177526L). AEU says owner only — expediters cannot go.",
-    "owner": "Allan"
+    "title": "🚨 Confirm GC civil penalty has been PAID",
+    "detail": "Per NYC Admin Code § 28-207.2.3, DOB will NOT rescind SWO until all civil penalties are paid — even if inspection passes. Ask Damian ASAP.",
+    "owner": "Allan / Damian"
   },
 
   "keyDates": [
+    {
+      "date": "2026-04-10",
+      "label": "April 10 — 8–10 AM",
+      "desc": "🎉 SWO Re-Inspection. Lenny Vicari (Supervising Inspector) visiting 176 Johnson St. Pawel on-site.",
+      "color": "green",
+      "countdown": true
+    },
     {
       "date": "2026-04-18",
       "label": "April 18",
@@ -130,22 +137,22 @@
 
   "blockers": [
     {
-      "name": "Second COC approval (39177526L)",
-      "detail": "4–5 week AEU review from April 3. Go to 280 Broadway to speed up.",
-      "owner": "AEU / Allan (in-person)",
-      "severity": "yellow"
-    },
-    {
-      "name": "GC civil penalty payment",
-      "detail": "Review approved but payment status unclear. Damian has not confirmed.",
-      "owner": "Damian",
+      "name": "🚨 GC civil penalty payment (LEGAL REQUIREMENT)",
+      "detail": "Per NYC Admin Code § 28-207.2.3, DOB will NOT rescind SWO until all civil penalties are paid — even if inspection passes. Payment status UNKNOWN.",
+      "owner": "Damian (ASAP)",
       "severity": "red"
     },
     {
-      "name": "SWO rescission inspection",
-      "detail": "OBM has docs. Needs to schedule inspection.",
-      "owner": "OBM / Damian",
+      "name": "Second COC approval (39177526L)",
+      "detail": "4–5 week AEU review from April 3. May NOT be required for SWO rescission (independent tracks). 280 Broadway trip ON HOLD.",
+      "owner": "AEU — priority TBD",
       "severity": "yellow"
+    },
+    {
+      "name": "SWO rescission inspection",
+      "detail": "SCHEDULED — Friday April 10, 8–10 AM. Lenny Vicari (Supervising Inspector). Pawel on-site ✔",
+      "owner": "Lenny Vicari / Pawel",
+      "severity": "green"
     },
     {
       "name": "Can 6A restart with just 6A SWO rescind?",
@@ -188,26 +195,29 @@
     { "date": "Apr 7", "track": "b-c", "trackLabel": "B + C", "desc": "Pawel speaks with Damian. Damian will follow up with DOB. Does NOT answer COC or penalty questions.", "owner": "Pawel / Damian" },
     { "date": "Apr 8", "track": "b", "trackLabel": "B", "desc": "Allan calls AEU x3. COC pending. Normal review: 4–5 weeks. Owner can go to 280 Broadway in person. Expediter CANNOT go.", "owner": "Allan" },
     { "date": "Apr 8", "track": "c", "trackLabel": "C", "desc": "Allan calls OBM. They don't see April 18 deadline — only May 6 hearing.", "owner": "Allan" },
-    { "date": "Apr 8", "track": "c", "trackLabel": "C", "desc": "Allan emails OBM supervisor re: SWO rescission requirements.", "owner": "Allan" }
+    { "date": "Apr 8", "track": "c", "trackLabel": "C", "desc": "Allan emails OBM supervisor re: SWO rescission requirements.", "owner": "Allan" },
+    { "date": "Apr 8", "track": "none", "trackLabel": "—", "desc": "Brooklyn Construction Enforcement: \"We have nothing to do with this.\" OBM is the only office for SWO rescission.", "owner": "Brooklyn Const. Enforcement" },
+    { "date": "Apr 8", "track": "c", "trackLabel": "C", "desc": "<strong>Lenny Vicari (OBM Supervising Inspector) replies in 14 minutes</strong> — offers re-inspection Friday April 10, 8–10 AM.", "owner": "Lenny Vicari" },
+    { "date": "Apr 8", "track": "c", "trackLabel": "C", "desc": "Allan confirms Friday April 10, 8–10 AM. <strong>Pawel on-site (confirmed).</strong>", "owner": "Allan / Pawel" }
   ],
 
   "timelineTodo": [
-    { "step": 1, "track": "b", "trackLabel": "B", "status": "next", "desc": "Allan goes to 280 Broadway with deed + ID to push COC review.", "owner": "Allan", "dep": null },
-    { "step": 2, "track": "b", "trackLabel": "B", "status": "unanswered", "desc": "Confirm with Damian: has GC civil penalty been paid?", "owner": "Allan / Damian", "dep": null },
-    { "step": 3, "track": "b", "trackLabel": "B", "status": "unanswered", "desc": "Confirm: who is Agnieszka Muczynski? Was COC resubmitted April 3?", "owner": "Allan / Damian", "dep": null },
-    { "step": 4, "track": "b", "trackLabel": "B", "status": "pending", "desc": "Second COC approved by AEU (COC0395691 for 39177526L).", "owner": "AEU", "dep": "4–5 week review from April 3" },
-    { "step": 5, "track": "b", "trackLabel": "B", "status": "unknown", "desc": "GC civil penalty paid (if not already).", "owner": "Damian", "dep": null },
-    { "step": 6, "track": "c", "trackLabel": "C", "status": "waiting", "desc": "OBM supervisor responds re: SWO rescission requirements.", "owner": "OBM", "dep": null },
-    { "step": 7, "track": "b-c", "trackLabel": "B + C", "status": "unanswered", "desc": "Does COC need approval before SWO can be lifted?", "owner": "OBM", "dep": null },
-    { "step": 8, "track": "c", "trackLabel": "C", "status": "waiting", "desc": "OBM schedules SWO rescission inspection.", "owner": "OBM", "dep": null },
-    { "step": 9, "track": "c", "trackLabel": "C", "status": "blocked", "desc": "DOB inspector visits — SWO rescinded for 6A.", "owner": "DOB", "dep": "Blocked by #8" },
+    { "step": 1, "track": "b", "trackLabel": "B", "status": "urgent", "desc": "Confirm with Damian: has GC civil penalty been PAID? Law requires this before SWO rescission (§ 28-207.2.3).", "owner": "Allan / Damian", "dep": null },
+    { "step": 2, "track": "b", "trackLabel": "B", "status": "unanswered", "desc": "Were any work-against-SWO penalties issued? ($6K–$12K each, must be paid before rescission per § 28-207.2.6.)", "owner": "Allan / Damian", "dep": null },
+    { "step": 3, "track": "b-c", "trackLabel": "B + C", "status": "unanswered", "desc": "Does the COC for 39177526L need to be approved before SWO can be rescinded? (Evidence suggests no — but not confirmed.)", "owner": "Lenny / Damian", "dep": null },
+    { "step": 4, "track": "b", "trackLabel": "B", "status": "pending", "desc": "Second COC approved by AEU (COC0395691 for 39177526L).", "owner": "AEU", "dep": "4–5 week review from April 3. May not block SWO rescission." },
+    { "step": 5, "track": "b", "trackLabel": "B", "status": "on-hold", "desc": "Go to 280 Broadway with deed + ID to push COC review. On hold — may not be needed if COC isn't required for SWO rescission.", "owner": "Allan", "dep": null },
+    { "step": 6, "track": "c", "trackLabel": "C", "status": "done", "desc": "OBM supervisor (Lenny Vicari) responded in 14 minutes.", "owner": "Lenny Vicari", "dep": null },
+    { "step": 7, "track": "b-c", "trackLabel": "B + C", "status": "likely-no", "desc": "Does COC need approval before SWO can be lifted? Evidence says no (inspection scheduled before COC approved). Needs explicit confirmation from Lenny or Damian.", "owner": "Lenny / Damian", "dep": null },
+    { "step": 8, "track": "c", "trackLabel": "C", "status": "done", "desc": "🎉 Inspection scheduled: Friday April 10, 8–10 AM. Lenny Vicari visiting 176 Johnson St.", "owner": "Lenny Vicari", "dep": null },
+    { "step": 9, "track": "c", "trackLabel": "C", "status": "friday", "desc": "DOB inspector visits — SWO rescinded for 6A.", "owner": "Lenny Vicari", "dep": "April 10, 8–10 AM" },
     { "step": 10, "track": "d", "trackLabel": "D", "status": "unanswered", "desc": "Can 6A resume after just 6A SWO rescind?", "owner": "Damian", "dep": null },
     { "step": 11, "track": "d", "trackLabel": "D", "status": "blocked", "desc": "DOB inspection of new work permit.", "owner": "DOB", "dep": "Blocked by #9" },
     { "step": 12, "track": "d", "trackLabel": "D", "status": "goal", "desc": "CONSTRUCTION RESUMES", "owner": "Pawel — THE GOAL", "dep": null }
   ],
 
   "team": [
-    { "initials": "AH", "name": "Allan Holmes", "role": "Owner", "status": "Going to 280 Broadway, calling AEU/OBM, pushing process" },
+    { "initials": "AH", "name": "Allan Holmes", "role": "Owner", "status": "Waiting on Damian re: penalty payment. Inspection confirmed Friday." },
     { "initials": "CF", "name": "Charlie Filson-Dineen", "role": "Owner", "status": "Co-owner. Design decisions, CC'd on all threads" },
     { "initials": "PU", "name": "Pawel Uradominki", "role": "GC · QuestArt Construction", "status": "Waiting on SWO lift to resume work" },
     { "initials": "DM", "name": "Damian Michalak", "role": "Expediter · Big Orange", "status": "Filed COCs, managing DOB. Key questions unanswered" },
@@ -216,7 +226,8 @@
     { "initials": "BA", "name": "Blessing Anosike", "role": "Board Expediter · Jack Jaffa", "status": "20+ years with building" },
     { "initials": "BH", "name": "Brian Hausman", "role": "Property Mgr · TKR Property Services", "status": "Building access, permit posting" },
     { "initials": "WB", "name": "Wojciech Baldyga", "role": "Electrician · Modern Voltage NYC", "status": "Completed electrical corrections" },
-    { "initials": "AM", "name": "Agnieszka Muczynski", "role": "COC Submitter · Unknown (Big Orange?)", "status": "Submitted COC on April 3. Identity unconfirmed" }
+    { "initials": "AM", "name": "Agnieszka Muczynski", "role": "COC Submitter · Unknown (Big Orange?)", "status": "Submitted COC on April 3. Identity unconfirmed" },
+    { "initials": "LV", "name": "Lenny Vicari", "role": "Supervising Inspector · Office of Strategic Inspections, NYC DOB", "status": "🎉 Re-inspection scheduled: Friday April 10, 8–10 AM" }
   ],
 
   "survivalGuide": {
@@ -238,7 +249,8 @@
     "contacts": [
       { "name": "AEU (Administrative Enforcement Unit)", "phone": "(212) 393-2405", "email": null, "desc": "COC review status, civil penalty status" },
       { "name": "OBM (Office of Building Marshal)", "phone": "(212) 393-2930", "email": "OBMSWO@buildings.nyc.gov", "desc": "SWO rescission, inspection scheduling" },
-      { "name": "Brooklyn Construction Enforcement", "phone": "(718) 802-3684", "email": "BKConstEnf@buildings.nyc.gov", "desc": "SWO reinspection (Brooklyn)" },
+      { "name": "Lenny Vicari — Supervising Inspector (OBM)", "phone": "(332) 205-0150", "email": "LVicari@buildings.nyc.gov", "desc": "Direct contact for SWO rescission inspection at 176 Johnson St" },
+      { "name": "Brooklyn Construction Enforcement", "phone": "(718) 802-3684", "email": "BKConstEnf@buildings.nyc.gov", "desc": "❌ Dead end for SWO — referred us to OBM" },
       { "name": "SWO Re-inspection Appointments", "phone": "(212) 393-2662", "email": "cseappointments@buildings.nyc.gov", "desc": "Formal appointment requests" },
       { "name": "Brooklyn DOB Borough Office", "phone": "(718) 802-3675", "email": null, "desc": "General customer service" },
       { "name": "NYC 311", "phone": "311", "email": null, "desc": "General services, DOB transfers · 24/7" }
@@ -255,6 +267,37 @@
       { "title": "Know AEU vs. OBM vs. ECB.", "body": "AEU reviews your Certificate of Correction. OBM handles SWO rescission and inspections. ECB handles hearings and penalty adjudication. They're separate." },
       { "title": "Jack Jaffa is an expeditor, not a law firm.", "body": "Despite the name, Jack Jaffa & Associates handles DOB paperwork. Legal defense is separate." }
     ]
+  },
+
+  "openQuestions": [
+    { "q": "Has the GC civil penalty actually been PAID?", "why": "NYC Admin Code § 28-207.2.3 requires all civil penalties paid before SWO rescission. Review is APPROVED but payment is UNKNOWN.", "owner": "Damian", "severity": "red" },
+    { "q": "Were any work-against-SWO penalties issued?", "why": "§ 28-207.2.6 — $6K–$12K per violation. Must be paid before rescission. Unknown if any were issued.", "owner": "Damian", "severity": "red" },
+    { "q": "Does the COC for 39177526L need to be approved before SWO can be rescinded?", "why": "Evidence suggests no — Lenny scheduled inspection before COC approved. But not explicitly confirmed.", "owner": "Lenny / Damian", "severity": "yellow" },
+    { "q": "Can 6A resume after just 6A SWO rescind?", "why": "Attorney punted to expediter. If building-wide SWO must clear, timeline extends significantly.", "owner": "Damian", "severity": "red" },
+    { "q": "Who is Agnieszka Muczynski?", "why": "She submitted the COC on April 3, not Damian. Is she at Big Orange? Does this affect anything?", "owner": "Damian", "severity": "gray" }
+  ],
+
+  "intelLog": [
+    { "date": "Apr 8", "source": "Brooklyn Construction Enforcement", "intel": "\"We have nothing to do with this.\" SWO rescission is exclusively OBM.", "impact": "Eliminates Brooklyn CE as a path. OBM is the only office." },
+    { "date": "Apr 8", "source": "Lenny Vicari (OBM)", "intel": "Responded to email in 14 minutes. Offered re-inspection Friday April 10. Did NOT mention needing COC approval first.", "impact": "Strongest signal yet that COC and SWO are independent tracks." },
+    { "date": "Apr 8", "source": "AEU (3 calls)", "intel": "COC review is 4–5 weeks. Owner can go to 280 Broadway to push. Expediters CANNOT go in person.", "impact": "280 Broadway trip is owner-only. But may not be needed if SWO can be lifted without COC." },
+    { "date": "Apr 7", "source": "DOB NOW portal", "intel": "GC civil penalty review (670218027) shows APPROVED. But 'approved' may mean review approved, not payment confirmed.", "impact": "Need Damian to confirm actual payment status." }
+  ],
+
+  "legalRequirements": {
+    "title": "NYC Admin Code Requirements for SWO Rescission",
+    "sections": [
+      { "code": "§ 28-207.2.3", "text": "All civil penalties must be PAID before SWO rescission.", "status": "UNKNOWN — GC penalty payment unconfirmed" },
+      { "code": "§ 28-207.2.6", "text": "Work-against-SWO penalties ($6K–$12K each) must also be paid.", "status": "UNKNOWN — may not apply" },
+      { "code": "§ 28-207.2", "text": "Commissioner must inspect and confirm conditions corrected.", "status": "SCHEDULED — April 10" }
+    ]
+  },
+
+  "displacementCost": {
+    "title": "Displacement Cost (Running Total)",
+    "weeklyRent": 800,
+    "startDate": "2026-03-02",
+    "note": "Should have moved in March 1. SWO made that impossible. Paying $800/week for current apartment we can't leave."
   },
 
   "property": {
