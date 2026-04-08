@@ -22,10 +22,10 @@
     },
     {
       "date": "2026-04-18",
-      "label": "April 18",
-      "desc": "60-day compliance deadline. COC filed April 3 — likely met, but unconfirmed.",
-      "color": "red",
-      "countdown": true
+      "label": "April 18 — ✅ MET",
+      "desc": "60-day cure filing window. COC filed April 3 — within window. This is a filing deadline, not approval. $5K+$1K/day penalty does NOT apply (that's §28-219.1, Class 1 only).",
+      "color": "green",
+      "countdown": false
     },
     {
       "date": "2026-05-01",
@@ -111,13 +111,13 @@
       "icon": "❓"
     },
     {
-      "name": "If 60-Day Deadline Missed",
-      "detail": "Penalty escalation",
-      "amount": "$5K+$1K/day",
+      "name": "60-Day Cure Window",
+      "detail": "✅ Met — COC filed April 3. $5K+$1K/day is §28-219.1 (Class 1 only, does not apply).",
+      "amount": "N/A",
       "amountNum": 0,
-      "status": "unknown",
+      "status": "resolved",
       "who": "",
-      "icon": "⚠️"
+      "icon": "✅"
     }
   ],
 
@@ -169,7 +169,7 @@
   ],
 
   "timelineDone": [
-    { "date": "Feb 17", "track": "a-b", "trackLabel": "A + B", "desc": "Partial Stop Work Order issued. Two violations: electrical (39177537R) and construction (39177526L). 60-day compliance clock starts.", "owner": "DOB" },
+    { "date": "Feb 17", "track": "a-b", "trackLabel": "A + B", "desc": "Partial Stop Work Order issued. Two violations: electrical (39177537R) and construction (39177526L). 60-day cure filing window starts.", "owner": "DOB" },
     { "date": "Feb 18", "track": "d", "trackLabel": "D", "desc": "First work permit issued for 6A renovation.", "owner": "Pawel" },
     { "date": "Mar 5", "track": "c", "trackLabel": "C", "desc": "SWO cleared for commercial space (not 6A).", "owner": "DOB" },
     { "date": "Mar 6–7", "track": "none", "trackLabel": "—", "desc": "Allan meets with board members. Learns Jack Jaffa is an expeditor (not a law firm). ECB hearings are optional.", "owner": "Allan" },
@@ -194,7 +194,7 @@
     { "date": "Apr 7", "track": "b", "trackLabel": "B", "desc": "Allan finds on DOB NOW: GC civil penalty review (670218027) shows APPROVED.", "owner": "Allan" },
     { "date": "Apr 7", "track": "b-c", "trackLabel": "B + C", "desc": "Pawel speaks with Damian. Damian will follow up with DOB. Does NOT answer COC or penalty questions.", "owner": "Pawel / Damian" },
     { "date": "Apr 8", "track": "b", "trackLabel": "B", "desc": "Allan calls AEU x3. COC pending. Normal review: 4–5 weeks. Owner can go to 280 Broadway in person. Expediter CANNOT go.", "owner": "Allan" },
-    { "date": "Apr 8", "track": "c", "trackLabel": "C", "desc": "Allan calls OBM. They don't see April 18 deadline — only May 6 hearing.", "owner": "Allan" },
+    { "date": "Apr 8", "track": "c", "trackLabel": "C", "desc": "Allan calls OBM. They don't see April 18 deadline — only May 6 hearing. (Confirms April 18 is cure window, not penalty cliff.)", "owner": "Allan" },
     { "date": "Apr 8", "track": "c", "trackLabel": "C", "desc": "Allan emails OBM supervisor re: SWO rescission requirements.", "owner": "Allan" },
     { "date": "Apr 8", "track": "none", "trackLabel": "—", "desc": "Brooklyn Construction Enforcement: \"We have nothing to do with this.\" OBM is the only office for SWO rescission.", "owner": "Brooklyn Const. Enforcement" },
     { "date": "Apr 8", "track": "c", "trackLabel": "C", "desc": "<strong>Lenny Vicari (OBM Supervising Inspector) replies in 14 minutes</strong> — offers re-inspection Friday April 10, 8–10 AM.", "owner": "Lenny Vicari" },
@@ -259,7 +259,7 @@
       { "title": "Your expediter can't do everything.", "body": "Two out of three AEU reps told me only the owner can go to 280 Broadway in person to speed up a COC review. Bring your deed and ID. Don't assume your expediter is handling it — verify." },
       { "title": "Call multiple times.", "body": "I called AEU three times and got different info each time. One rep said my expediter could come. Two said only the owner. Triangulate." },
       { "title": "COC and SWO may be separate tracks.", "body": "AEU reviews your COC. OBM handles the SWO. One rep told me they don't think COC approval is needed before the SWO can be lifted. Push both simultaneously." },
-      { "title": "The 60-day deadline may be for filing, not approval.", "body": "Neither AEU nor OBM flagged our April 18 date as a crisis. The COC was filed before the deadline. The May 6 ECB hearing is where penalties get adjudicated." },
+      { "title": "The 60-day deadline IS for filing, not approval — and we met it.", "body": "Per 1 RCNY §102-01, the 60-day 'cure' window is about filing the COC (done April 3). The $5K+$1K/day penalty we initially feared comes from §28-219.1, which only applies to Class 1 (immediately hazardous) violations — not our Class 2 WWP. Neither AEU nor OBM flagged April 18 as a crisis. May 6 OATH hearing is the real action date." },
       { "title": "DOB gets frustrated with too many follow-ups.", "body": "My contractor warned me: expediters can push to a point, then DOB pushes back. Balance persistence with patience." },
       { "title": "Check DOB NOW yourself.", "body": "Don't wait for your expediter. Go to the DOB NOW portal and look up your property. I found my civil penalty review was approved before anyone told me." },
       { "title": "Go to 280 Broadway.", "body": "If your COC review is taking too long, go in person. 280 Broadway, lower Manhattan, 8:30–3:45 weekdays. Deed + government ID. Highest-impact move an owner can make." },
@@ -322,7 +322,7 @@
         "summons": "39177526L",
         "coc": "COC0395691 — In Review",
         "penalty": "Review approved, payment unknown",
-        "deadline": "April 18, 2026"
+        "deadline": "May 6, 2026 (OATH hearing). Cure filing window (April 18) already met."
       }
     ],
     "professionals": [
