@@ -4,1927 +4,252 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SWOhell.com — NYC Stop Work Order Dashboard</title>
-  <meta name="description" content="Real-time dashboard tracking a NYC Stop Work Order at 176 Johnson St, Brooklyn. Timeline, blockers, team, contacts, and a survival guide for homeowners.">
+  <meta name="description" content="Real-time dashboard tracking a NYC Stop Work Order at 176 Johnson St, Brooklyn.">
   <meta property="og:title" content="SWOhell.com — NYC Stop Work Order Dashboard">
-  <meta property="og:description" content="A first-time homeowner's transparent tracker through NYC DOB hell. Timeline, blockers, and a survival guide.">
+  <meta property="og:description" content="A first-time homeowner's transparent tracker through NYC DOB hell.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://swohell.com">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23ef4444'/><text x='50' y='62' text-anchor='middle' font-size='40' fill='white'>!</text></svg>">
   <style>
-    /* ========================================
-       DESIGN TOKENS — Apple Wallet-inspired
-       ======================================== */
-    :root {
-      --bg: #f2f2f7;
-      --bg-card: #ffffff;
-      --bg-card-alt: #f9f9fb;
-      --border: #e5e5ea;
-      --border-light: #f0f0f5;
-
-      --text-primary: #1c1c1e;
-      --text-secondary: #6e6e73;
-      --text-muted: #aeaeb2;
-
-      /* Track Colors */
-      --track-a: #34c759;
-      --track-b: #ff9f0a;
-      --track-c: #007aff;
-      --track-d: #ff3b30;
-
-      /* Status */
-      --status-red: #ff3b30;
-      --status-yellow: #ff9f0a;
-      --status-green: #34c759;
-      --status-gray: #8e8e93;
-
-      --accent: #ff3b30;
-      --accent-bg: #fff2f1;
-
-      /* Typography */
-      --font-body: -apple-system, 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif;
-      --font-heading: -apple-system, 'SF Pro Display', 'Helvetica Neue', system-ui, sans-serif;
-      --font-mono: 'SF Mono', ui-monospace, 'Cascadia Code', monospace;
-
-      /* Spacing */
-      --space-xs: 4px;
-      --space-sm: 8px;
-      --space-md: 16px;
-      --space-lg: 24px;
-      --space-xl: 32px;
-      --space-2xl: 48px;
-
-      --max-width: 480px;
-      --radius: 16px;
-      --radius-sm: 12px;
-      --radius-xs: 8px;
-    }
-
-    /* ========================================
-       RESET + BASE
-       ======================================== */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-
-    body {
-      font-family: var(--font-body);
-      background: var(--bg);
-      color: var(--text-primary);
-      line-height: 1.45;
-      font-size: 16px;
-      -webkit-font-smoothing: antialiased;
-      min-height: 100vh;
-    }
-
-    a { color: var(--track-c); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    /* ========================================
-       LAYOUT
-       ======================================== */
-    .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 var(--space-md);
-    }
-
-    .card {
-      background: var(--bg-card);
-      border-radius: var(--radius);
-      padding: var(--space-lg);
-      margin-bottom: var(--space-md);
-    }
-
-    .card--flush {
-      padding: 0;
-    }
-
-    .section-label {
-      font-family: var(--font-heading);
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin: var(--space-xl) 0 var(--space-md);
-    }
-
-    /* ========================================
-       STATUS BAR (top)
-       ======================================== */
-    .status-bar {
-      background: var(--status-red);
-      color: white;
-      text-align: center;
-      padding: var(--space-sm) var(--space-md);
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .status-bar-dot {
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: white;
-      margin-right: 6px;
-      animation: blink 2s ease-in-out infinite;
-      vertical-align: middle;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
-    /* ========================================
-       HEADER
-       ======================================== */
-    .page-header {
-      padding: var(--space-lg) 0 var(--space-sm);
-    }
-
-    .page-title {
-      font-family: var(--font-heading);
-      font-size: 34px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-    }
-
-    .page-subtitle {
-      font-size: 15px;
-      color: var(--text-secondary);
-      margin-top: 2px;
-    }
-
-    /* ========================================
-       NEXT ACTION (prominent)
-       ======================================== */
-    .next-action {
-      background: var(--text-primary);
-      color: white;
-      border-radius: var(--radius);
-      padding: var(--space-lg);
-      margin-bottom: var(--space-md);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .next-action-eyebrow {
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: rgba(255,255,255,0.5);
-      margin-bottom: var(--space-xs);
-    }
-
-    .next-action-title {
-      font-family: var(--font-heading);
-      font-size: 20px;
-      font-weight: 700;
-      line-height: 1.25;
-      margin-bottom: var(--space-sm);
-    }
-
-    .next-action-detail {
-      font-size: 14px;
-      color: rgba(255,255,255,0.7);
-      line-height: 1.4;
-    }
-
-    .next-action-owner {
-      display: inline-block;
-      margin-top: var(--space-md);
-      font-size: 13px;
-      font-weight: 600;
-      color: white;
-      background: rgba(255,255,255,0.15);
-      padding: 4px 12px;
-      border-radius: 20px;
-    }
-
-    /* ========================================
-       SUMMARY STATS (like Card Balance row)
-       ======================================== */
-    .stats-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-sm);
-      margin-bottom: var(--space-md);
-    }
-
-    .stat-card {
-      background: var(--bg-card);
-      border-radius: var(--radius-sm);
-      padding: var(--space-md) var(--space-lg);
-    }
-
-    .stat-label {
-      font-size: 13px;
-      color: var(--text-secondary);
-    }
-
-    .stat-value {
-      font-family: var(--font-heading);
-      font-size: 28px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      margin-top: 2px;
-    }
-
-    .stat-value--red { color: var(--status-red); }
-    .stat-value--small { font-size: 20px; }
-
-    .stat-sub {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    /* ========================================
-       KEY DATES TIMELINE
-       ======================================== */
-    .key-dates-card {
-      background: var(--bg-card);
-      border-radius: var(--radius);
-      padding: var(--space-lg);
-      margin-bottom: var(--space-md);
-    }
-
-    .key-dates-title {
-      font-family: var(--font-heading);
-      font-size: 17px;
-      font-weight: 600;
-      margin-bottom: var(--space-lg);
-    }
-
-    .kd-list {
-      list-style: none;
-      position: relative;
-    }
-
-    .kd-item {
-      position: relative;
-      padding-left: 44px;
-      padding-bottom: var(--space-lg);
-    }
-
-    .kd-item:last-child { padding-bottom: 0; }
-
-    /* Vertical line */
-    .kd-item::before {
-      content: '';
-      position: absolute;
-      left: 15px;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: var(--border);
-    }
-
-    .kd-item:last-child::before { display: none; }
-
-    .kd-dot {
-      position: absolute;
-      left: 6px;
-      top: 2px;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      font-weight: 700;
-      color: white;
-    }
-
-    .kd-dot--today { background: var(--text-primary); }
-    .kd-dot--red { background: var(--status-red); }
-    .kd-dot--yellow { background: var(--status-yellow); }
-    .kd-dot--blue { background: var(--track-c); }
-    .kd-dot--green { background: var(--status-green); }
-
-    .kd-date {
-      font-family: var(--font-heading);
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .kd-label {
-      font-size: 14px;
-      color: var(--text-secondary);
-      margin-top: 2px;
-      line-height: 1.35;
-    }
-
-    .kd-countdown {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      margin-top: 4px;
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 4px;
-    }
-
-    .kd-countdown--urgent { background: rgba(255,59,48,0.1); color: var(--status-red); }
-    .kd-countdown--warn { background: rgba(255,159,10,0.1); color: var(--status-yellow); }
-    .kd-countdown--info { background: rgba(0,122,255,0.1); color: var(--track-c); }
-
-    /* ========================================
-       TRANSACTIONS (Payments)
-       ======================================== */
-    .txn-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      padding: var(--space-lg) var(--space-lg) var(--space-md);
-    }
-
-    .txn-title {
-      font-family: var(--font-heading);
-      font-size: 22px;
-      font-weight: 700;
-    }
-
-    .txn-total {
-      font-family: var(--font-heading);
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--status-red);
-    }
-
-    .txn-list {
-      list-style: none;
-    }
-
-    .txn-item {
-      display: flex;
-      align-items: center;
-      gap: var(--space-md);
-      padding: var(--space-md) var(--space-lg);
-      border-top: 1px solid var(--border-light);
-    }
-
-    .txn-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: var(--radius-xs);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-
-    .txn-icon--paid { background: rgba(52, 199, 89, 0.12); }
-    .txn-icon--pending { background: rgba(255, 159, 10, 0.12); }
-    .txn-icon--unknown { background: rgba(255, 59, 48, 0.12); }
-
-    .txn-info { flex: 1; min-width: 0; }
-
-    .txn-name {
-      font-size: 15px;
-      font-weight: 500;
-    }
-
-    .txn-detail {
-      font-size: 13px;
-      color: var(--text-secondary);
-      margin-top: 1px;
-    }
-
-    .txn-amount-wrap {
-      text-align: right;
-      flex-shrink: 0;
-    }
-
-    .txn-amount {
-      font-family: var(--font-heading);
-      font-size: 15px;
-      font-weight: 600;
-    }
-
-    .txn-status {
-      font-size: 12px;
-      margin-top: 1px;
-    }
-
-    .txn-status--paid { color: var(--status-green); }
-    .txn-status--pending { color: var(--status-yellow); }
-    .txn-status--unknown { color: var(--status-red); }
-
-    /* ========================================
-       TIMELINE
-       ======================================== */
-    .tl-legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-sm) var(--space-md);
-      margin-bottom: var(--space-lg);
-      font-size: 13px;
-      color: var(--text-secondary);
-    }
-
-    .tl-legend-item {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .tl-legend-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-    }
-
-    .tl-legend-dot--a { background: var(--track-a); }
-    .tl-legend-dot--b { background: var(--track-b); }
-    .tl-legend-dot--c { background: var(--track-c); }
-    .tl-legend-dot--d { background: var(--track-d); }
-
-    .tl-zone-label {
-      font-size: 13px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-muted);
-      margin-bottom: var(--space-md);
-      margin-top: var(--space-lg);
-    }
-
-    .tl-list {
-      list-style: none;
-    }
-
-    .tl-entry {
-      position: relative;
-      padding-left: 28px;
-      padding-bottom: var(--space-md);
-    }
-
-    .tl-entry::before {
-      content: '';
-      position: absolute;
-      left: 5px;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: var(--border);
-    }
-
-    .tl-entry:last-child::before { display: none; }
-
-    .tl-node {
-      position: absolute;
-      left: 0;
-      top: 3px;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      border: 2px solid var(--text-muted);
-      background: var(--bg);
-      z-index: 1;
-    }
-
-    /* DONE: filled nodes */
-    .tl-done [data-track="a"] .tl-node,
-    .tl-done [data-track="a-b"] .tl-node { border-color: var(--track-a); background: var(--track-a); }
-    .tl-done [data-track="b"] .tl-node { border-color: var(--track-b); background: var(--track-b); }
-    .tl-done [data-track="b-c"] .tl-node { border-color: var(--track-b); background: var(--track-b); }
-    .tl-done [data-track="c"] .tl-node { border-color: var(--track-c); background: var(--track-c); }
-    .tl-done [data-track="d"] .tl-node { border-color: var(--track-d); background: var(--track-d); }
-    .tl-done [data-track="none"] .tl-node { border-color: var(--text-muted); background: var(--text-muted); }
-
-    /* TODO: outline nodes */
-    .tl-todo [data-track="b"] .tl-node { border-color: var(--track-b); }
-    .tl-todo [data-track="b-c"] .tl-node { border-color: var(--track-b); }
-    .tl-todo [data-track="c"] .tl-node { border-color: var(--track-c); }
-    .tl-todo [data-track="d"] .tl-node { border-color: var(--track-d); }
-
-    .tl-todo .tl-entry::before {
-      background: none;
-      border-left: 2px dashed var(--border);
-      width: 0;
-    }
-
-    .tl-date {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    .tl-track {
-      font-size: 11px;
-      font-weight: 600;
-      padding: 1px 6px;
-      border-radius: 4px;
-      margin-left: var(--space-sm);
-    }
-
-    [data-track="a"] .tl-track { background: rgba(52, 199, 89, 0.12); color: var(--track-a); }
-    [data-track="a-b"] .tl-track { background: rgba(52, 199, 89, 0.12); color: var(--track-a); }
-    [data-track="b"] .tl-track { background: rgba(255, 159, 10, 0.12); color: var(--track-b); }
-    [data-track="b-c"] .tl-track { background: rgba(255, 159, 10, 0.12); color: var(--track-b); }
-    [data-track="c"] .tl-track { background: rgba(0, 122, 255, 0.12); color: var(--track-c); }
-    [data-track="d"] .tl-track { background: rgba(255, 59, 48, 0.12); color: var(--track-d); }
-    [data-track="none"] .tl-track { background: rgba(142, 142, 147, 0.12); color: var(--text-muted); }
-
-    .tl-desc {
-      font-size: 15px;
-      line-height: 1.4;
-      color: var(--text-primary);
-      margin-top: 2px;
-    }
-
-    .tl-owner {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-top: 2px;
-      display: block;
-    }
-
-    .tl-step {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .tl-status-badge {
-      font-size: 11px;
-      font-weight: 600;
-      padding: 1px 6px;
-      border-radius: 4px;
-      margin-left: var(--space-sm);
-    }
-
-    .tl-status-badge--next { background: rgba(255, 59, 48, 0.1); color: var(--status-red); }
-    .tl-status-badge--pending { background: rgba(255, 159, 10, 0.1); color: var(--status-yellow); }
-    .tl-status-badge--unknown { background: rgba(255, 59, 48, 0.1); color: var(--status-red); }
-    .tl-status-badge--waiting { background: rgba(0, 122, 255, 0.1); color: var(--track-c); }
-    .tl-status-badge--blocked { background: rgba(142, 142, 147, 0.1); color: var(--status-gray); }
-    .tl-status-badge--unanswered { background: rgba(255, 159, 10, 0.1); color: var(--status-yellow); }
-
-    .tl-dep {
-      font-size: 12px;
-      color: var(--text-muted);
-      font-style: italic;
-      display: block;
-      margin-top: 2px;
-    }
-
-    /* Today divider */
-    .tl-divider {
-      position: relative;
-      padding: var(--space-lg) 0;
-      padding-left: 28px;
-    }
-
-    .tl-divider::before {
-      content: '';
-      position: absolute;
-      left: 5px;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: var(--border);
-    }
-
-    .tl-divider-inner {
-      display: flex;
-      align-items: center;
-      gap: var(--space-sm);
-    }
-
-    .tl-divider-label {
-      font-size: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--status-red);
-      white-space: nowrap;
-    }
-
-    .tl-divider-line {
-      flex: 1;
-      height: 1px;
-      background: var(--status-red);
-      opacity: 0.25;
-    }
-
-    /* Goal node */
-    .tl-entry--goal .tl-node {
-      width: 16px;
-      height: 16px;
-      left: -2px;
-      border-width: 3px;
-      border-color: var(--track-d);
-      animation: pulse 2.5s ease-in-out infinite;
-    }
-
-    .tl-entry--goal .tl-desc {
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--track-d);
-    }
-
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.25); }
-      50% { box-shadow: 0 0 0 6px rgba(255, 59, 48, 0); }
-    }
-
-    /* ========================================
-       BLOCKERS
-       ======================================== */
-    .blocker-item {
-      padding: var(--space-md) var(--space-lg);
-      border-top: 1px solid var(--border-light);
-      display: flex;
-      gap: var(--space-md);
-      align-items: flex-start;
-    }
-
-    .blocker-item:first-child { border-top: none; }
-
-    .blocker-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      margin-top: 5px;
-      flex-shrink: 0;
-    }
-
-    .blocker-dot--red { background: var(--status-red); }
-    .blocker-dot--yellow { background: var(--status-yellow); }
-    .blocker-dot--gray { background: var(--status-gray); }
-
-    .blocker-name {
-      font-size: 15px;
-      font-weight: 500;
-    }
-
-    .blocker-detail {
-      font-size: 13px;
-      color: var(--text-secondary);
-      margin-top: 2px;
-    }
-
-    .blocker-owner {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    /* ========================================
-       KEY DATES
-       ======================================== */
-    .date-item {
-      padding: var(--space-md) var(--space-lg);
-      border-top: 1px solid var(--border-light);
-      display: flex;
-      gap: var(--space-md);
-      align-items: flex-start;
-    }
-
-    .date-item:first-child { border-top: none; }
-
-    .date-icon {
-      font-size: 16px;
-      line-height: 1;
-      margin-top: 2px;
-    }
-
-    .date-label {
-      font-size: 15px;
-      font-weight: 600;
-    }
-
-    .date-desc {
-      font-size: 13px;
-      color: var(--text-secondary);
-      margin-top: 2px;
-    }
-
-    /* ========================================
-       TEAM
-       ======================================== */
-    .team-item {
-      padding: var(--space-md) var(--space-lg);
-      border-top: 1px solid var(--border-light);
-      display: flex;
-      gap: var(--space-md);
-      align-items: center;
-    }
-
-    .team-item:first-child { border-top: none; }
-
-    .team-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text-secondary);
-      flex-shrink: 0;
-    }
-
-    .team-info { flex: 1; min-width: 0; }
-
-    .team-name {
-      font-size: 15px;
-      font-weight: 500;
-    }
-
-    .team-role {
-      font-size: 13px;
-      color: var(--text-secondary);
-    }
-
-    .team-status {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    /* ========================================
-       NUMBERS (Balance Details style)
-       ======================================== */
-    .numbers-item {
-      padding: var(--space-md) var(--space-lg);
-      border-top: 1px solid var(--border-light);
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-    }
-
-    .numbers-item:first-child { border-top: none; }
-
-    .numbers-label {
-      font-size: 15px;
-      color: var(--text-primary);
-    }
-
-    .numbers-value {
-      font-family: var(--font-heading);
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .numbers-value--red { color: var(--status-red); }
-
-    /* ========================================
-       SURVIVAL GUIDE
-       ======================================== */
-    details {
-      background: var(--bg-card);
-      border-radius: var(--radius-sm);
-      margin-bottom: var(--space-sm);
-      overflow: hidden;
-    }
-
-    summary {
-      padding: var(--space-md) var(--space-lg);
-      cursor: pointer;
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text-primary);
-      user-select: none;
-      list-style: none;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    summary::-webkit-details-marker { display: none; }
-
-    summary::after {
-      content: '+';
-      font-size: 20px;
-      font-weight: 300;
-      color: var(--text-muted);
-      line-height: 1;
-    }
-
-    details[open] summary::after { content: '\2212'; }
-
-    .guide-content {
-      padding: 0 var(--space-lg) var(--space-lg);
-    }
-
-    /* Flowchart */
-    .flow-list { list-style: none; }
-
-    .flow-step {
-      position: relative;
-      padding-left: 28px;
-      padding-bottom: var(--space-md);
-    }
-
-    .flow-step::before {
-      content: '';
-      position: absolute;
-      left: 7px;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: var(--border);
-    }
-
-    .flow-step:last-child::before { display: none; }
-
-    .flow-step-icon {
-      position: absolute;
-      left: 0;
-      top: 0;
-      font-size: 14px;
-    }
-
-    .flow-step-text {
-      font-size: 14px;
-      color: var(--text-primary);
-    }
-
-    .flow-step-note {
-      font-size: 12px;
-      color: var(--text-muted);
-      display: block;
-      margin-top: 2px;
-    }
-
-    /* Contacts */
-    .contact-item {
-      padding: var(--space-md) 0;
-      border-top: 1px solid var(--border-light);
-    }
-
-    .contact-item:first-child { border-top: none; }
-
-    .contact-name {
-      font-size: 15px;
-      font-weight: 500;
-    }
-
-    .contact-phone {
-      font-family: var(--font-mono);
-      font-size: 14px;
-      color: var(--track-c);
-    }
-
-    .contact-email {
-      font-size: 13px;
-      color: var(--track-c);
-    }
-
-    .contact-desc {
-      font-size: 13px;
-      color: var(--text-secondary);
-      margin-top: 2px;
-    }
-
-    /* Tips */
-    .tip-item {
-      padding: var(--space-md) 0;
-      border-top: 1px solid var(--border-light);
-    }
-
-    .tip-item:first-child { border-top: none; }
-
-    .tip-number {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .tip-title {
-      font-size: 15px;
-      font-weight: 600;
-      display: block;
-      margin-top: 2px;
-    }
-
-    .tip-body {
-      font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 1.45;
-      margin-top: 4px;
-    }
-
-    /* ========================================
-       PROPERTY DETAILS
-       ======================================== */
-    .property-detail-row {
-      padding: var(--space-sm) var(--space-lg);
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      border-top: 1px solid var(--border-light);
-      font-size: 14px;
-    }
-
-    .property-detail-row:first-child { border-top: none; }
-
-    .property-key { color: var(--text-secondary); }
-
-    .property-val {
-      font-weight: 500;
-      text-align: right;
-      color: var(--text-primary);
-    }
-
-    .property-sub-header {
-      padding: var(--space-md) var(--space-lg) var(--space-xs);
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      border-top: 1px solid var(--border-light);
-    }
-
-    /* ========================================
-       FOOTER
-       ======================================== */
-    .site-footer {
-      padding: var(--space-xl) 0 var(--space-2xl);
-      text-align: center;
-    }
-
-    .footer-quote {
-      font-size: 15px;
-      color: var(--text-secondary);
-      font-style: italic;
-      margin-bottom: var(--space-md);
-    }
-
-    .footer-credit {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    .footer-updated {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-top: var(--space-sm);
-      font-family: var(--font-mono);
-    }
-
-    /* ========================================
-       NAV TABS
-       ======================================== */
-    .section-nav {
-      position: sticky;
-      top: 33px;
-      z-index: 99;
-      background: rgba(242, 242, 247, 0.85);
-      -webkit-backdrop-filter: blur(20px);
-      backdrop-filter: blur(20px);
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .section-nav ul {
-      display: flex;
-      list-style: none;
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 var(--space-md);
-    }
-
-    .section-nav a {
-      display: block;
-      padding: var(--space-sm) var(--space-md);
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text-muted);
-      white-space: nowrap;
-    }
-
-    .section-nav a:hover {
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    /* ========================================
-       RESPONSIVE
-       ======================================== */
-    @media (min-width: 520px) {
-      :root { --max-width: 520px; }
-    }
-
-    @media (min-width: 768px) {
-      :root { --max-width: 600px; }
-    }
+    :root{--bg:#f2f2f7;--bg-card:#fff;--border:#e5e5ea;--border-light:#f0f0f5;--text-primary:#1c1c1e;--text-secondary:#6e6e73;--text-muted:#aeaeb2;--track-a:#34c759;--track-b:#ff9f0a;--track-c:#007aff;--track-d:#ff3b30;--status-red:#ff3b30;--status-yellow:#ff9f0a;--status-green:#34c759;--status-gray:#8e8e93;--font-body:-apple-system,'SF Pro Text','Helvetica Neue',system-ui,sans-serif;--font-heading:-apple-system,'SF Pro Display','Helvetica Neue',system-ui,sans-serif;--font-mono:'SF Mono',ui-monospace,'Cascadia Code',monospace;--space-xs:4px;--space-sm:8px;--space-md:16px;--space-lg:24px;--space-xl:32px;--space-2xl:48px;--max-width:480px;--radius:16px;--radius-sm:12px;--radius-xs:8px}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+    body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary);line-height:1.45;font-size:16px;-webkit-font-smoothing:antialiased;min-height:100vh}
+    a{color:var(--track-c);text-decoration:none}a:hover{text-decoration:underline}
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 var(--space-md)}
+    .card{background:var(--bg-card);border-radius:var(--radius);padding:var(--space-lg);margin-bottom:var(--space-md)}.card--flush{padding:0}
+    .section-label{font-family:var(--font-heading);font-size:22px;font-weight:700;margin:var(--space-xl) 0 var(--space-md)}
+    .status-bar{background:var(--status-red);color:#fff;text-align:center;padding:var(--space-sm) var(--space-md);font-size:13px;font-weight:600;letter-spacing:.02em;position:sticky;top:0;z-index:100}
+    .status-bar-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#fff;margin-right:6px;animation:blink 2s ease-in-out infinite;vertical-align:middle}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+    .section-nav{position:sticky;top:33px;z-index:99;background:rgba(242,242,247,.85);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);overflow-x:auto;-webkit-overflow-scrolling:touch;border-bottom:1px solid var(--border)}
+    .section-nav ul{display:flex;list-style:none;max-width:var(--max-width);margin:0 auto;padding:0 var(--space-md)}
+    .section-nav a{display:block;padding:var(--space-sm) var(--space-md);font-size:13px;font-weight:500;color:var(--text-muted);white-space:nowrap}.section-nav a:hover{color:var(--text-primary);text-decoration:none}
+    .page-header{padding:var(--space-lg) 0 var(--space-sm)}
+    .page-title{font-family:var(--font-heading);font-size:34px;font-weight:700;letter-spacing:-.5px}
+    .page-subtitle{font-size:15px;color:var(--text-secondary);margin-top:2px}
+    .next-action{background:var(--text-primary);color:#fff;border-radius:var(--radius);padding:var(--space-lg);margin-bottom:var(--space-md)}
+    .next-action-eyebrow{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.5);margin-bottom:var(--space-xs)}
+    .next-action-title{font-family:var(--font-heading);font-size:20px;font-weight:700;line-height:1.25;margin-bottom:var(--space-sm)}
+    .next-action-detail{font-size:14px;color:rgba(255,255,255,.7);line-height:1.4}
+    .next-action-owner{display:inline-block;margin-top:var(--space-md);font-size:13px;font-weight:600;color:#fff;background:rgba(255,255,255,.15);padding:4px 12px;border-radius:20px}
+    .stats-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-sm);margin-bottom:var(--space-md)}
+    .stat-card{background:var(--bg-card);border-radius:var(--radius-sm);padding:var(--space-md) var(--space-lg)}
+    .stat-label{font-size:13px;color:var(--text-secondary)}.stat-value{font-family:var(--font-heading);font-size:28px;font-weight:700;letter-spacing:-.5px;margin-top:2px}.stat-value--red{color:var(--status-red)}.stat-value--small{font-size:20px}.stat-sub{font-size:13px;color:var(--text-muted);margin-top:2px}
+    .kd-list{list-style:none}.kd-item{position:relative;padding-left:44px;padding-bottom:var(--space-lg)}.kd-item:last-child{padding-bottom:0}
+    .kd-item::before{content:'';position:absolute;left:15px;top:0;bottom:0;width:2px;background:var(--border)}.kd-item:last-child::before{display:none}
+    .kd-dot{position:absolute;left:6px;top:2px;width:20px;height:20px;border-radius:50%;z-index:1}
+    .kd-dot--today{background:var(--text-primary)}.kd-dot--red{background:var(--status-red)}.kd-dot--yellow{background:var(--status-yellow)}.kd-dot--blue{background:var(--track-c)}.kd-dot--green{background:var(--status-green)}
+    .kd-date{font-family:var(--font-heading);font-size:17px;font-weight:600}.kd-label{font-size:14px;color:var(--text-secondary);margin-top:2px;line-height:1.35}
+    .kd-countdown{font-family:var(--font-mono);font-size:12px;margin-top:4px;display:inline-block;padding:2px 8px;border-radius:4px}
+    .kd-countdown--red{background:rgba(255,59,48,.1);color:var(--status-red)}.kd-countdown--yellow{background:rgba(255,159,10,.1);color:var(--status-yellow)}.kd-countdown--blue{background:rgba(0,122,255,.1);color:var(--track-c)}.kd-countdown--green{background:rgba(52,199,89,.1);color:var(--status-green)}
+    .txn-header{display:flex;justify-content:space-between;align-items:baseline;padding:var(--space-lg) var(--space-lg) var(--space-md)}
+    .txn-title{font-family:var(--font-heading);font-size:22px;font-weight:700}.txn-total{font-family:var(--font-heading);font-size:17px;font-weight:600;color:var(--status-red)}
+    .txn-item{display:flex;align-items:center;gap:var(--space-md);padding:var(--space-md) var(--space-lg);border-top:1px solid var(--border-light)}
+    .txn-icon{width:40px;height:40px;border-radius:var(--radius-xs);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+    .txn-icon--paid{background:rgba(52,199,89,.12)}.txn-icon--pending{background:rgba(255,159,10,.12)}.txn-icon--unknown{background:rgba(255,59,48,.12)}
+    .txn-info{flex:1;min-width:0}.txn-name{font-size:15px;font-weight:500}.txn-detail{font-size:13px;color:var(--text-secondary);margin-top:1px}
+    .txn-amount-wrap{text-align:right;flex-shrink:0}.txn-amount{font-family:var(--font-heading);font-size:15px;font-weight:600}.txn-status{font-size:12px;margin-top:1px}
+    .txn-status--paid{color:var(--status-green)}.txn-status--pending{color:var(--status-yellow)}.txn-status--unknown{color:var(--status-red)}
+    .numbers-item{padding:var(--space-md) var(--space-lg);border-top:1px solid var(--border-light);display:flex;justify-content:space-between;align-items:baseline}.numbers-item:first-child{border-top:none}
+    .numbers-label{font-size:15px}.numbers-value{font-family:var(--font-heading);font-size:15px;font-weight:600}.numbers-value--red{color:var(--status-red)}
+    .blocker-item{padding:var(--space-md) var(--space-lg);border-top:1px solid var(--border-light);display:flex;gap:var(--space-md);align-items:flex-start}.blocker-item:first-child{border-top:none}
+    .blocker-dot{width:10px;height:10px;border-radius:50%;margin-top:5px;flex-shrink:0}
+    .blocker-dot--red{background:var(--status-red)}.blocker-dot--yellow{background:var(--status-yellow)}.blocker-dot--gray{background:var(--status-gray)}
+    .blocker-name{font-size:15px;font-weight:500}.blocker-detail{font-size:13px;color:var(--text-secondary);margin-top:2px}.blocker-owner{font-size:12px;color:var(--text-muted);margin-top:2px}
+    .tl-legend{display:flex;flex-wrap:wrap;gap:var(--space-sm) var(--space-md);margin-bottom:var(--space-lg);font-size:13px;color:var(--text-secondary)}
+    .tl-legend-item{display:flex;align-items:center;gap:4px}.tl-legend-dot{width:8px;height:8px;border-radius:50%}
+    .tl-legend-dot--a{background:var(--track-a)}.tl-legend-dot--b{background:var(--track-b)}.tl-legend-dot--c{background:var(--track-c)}.tl-legend-dot--d{background:var(--track-d)}
+    .tl-zone-label{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);margin-bottom:var(--space-md);margin-top:var(--space-lg)}
+    .tl-list{list-style:none}.tl-entry{position:relative;padding-left:28px;padding-bottom:var(--space-md)}
+    .tl-entry::before{content:'';position:absolute;left:5px;top:0;bottom:0;width:2px;background:var(--border)}.tl-entry:last-child::before{display:none}
+    .tl-node{position:absolute;left:0;top:3px;width:12px;height:12px;border-radius:50%;border:2px solid var(--text-muted);background:var(--bg);z-index:1}
+    .tl-date{font-family:var(--font-mono);font-size:12px;color:var(--text-muted);font-weight:500}
+    .tl-track{font-size:11px;font-weight:600;padding:1px 6px;border-radius:4px;margin-left:var(--space-sm)}
+    .tl-desc{font-size:15px;line-height:1.4;margin-top:2px}.tl-owner{font-size:13px;color:var(--text-muted);margin-top:2px;display:block}
+    .tl-step{font-family:var(--font-mono);font-size:11px;color:var(--text-muted)}
+    .tl-status-badge{font-size:11px;font-weight:600;padding:1px 6px;border-radius:4px;margin-left:var(--space-sm)}
+    .tl-dep{font-size:12px;color:var(--text-muted);font-style:italic;display:block;margin-top:2px}
+    [data-track="a"] .tl-track,[data-track="a-b"] .tl-track{background:rgba(52,199,89,.12);color:var(--track-a)}
+    [data-track="b"] .tl-track{background:rgba(255,159,10,.12);color:var(--track-b)}[data-track="b-c"] .tl-track{background:rgba(255,159,10,.12);color:var(--track-b)}
+    [data-track="c"] .tl-track{background:rgba(0,122,255,.12);color:var(--track-c)}[data-track="d"] .tl-track{background:rgba(255,59,48,.12);color:var(--track-d)}
+    [data-track="none"] .tl-track{background:rgba(142,142,147,.12);color:var(--text-muted)}
+    .tl-done [data-track="a"] .tl-node,.tl-done [data-track="a-b"] .tl-node{border-color:var(--track-a);background:var(--track-a)}
+    .tl-done [data-track="b"] .tl-node{border-color:var(--track-b);background:var(--track-b)}.tl-done [data-track="b-c"] .tl-node{border-color:var(--track-b);background:var(--track-b)}
+    .tl-done [data-track="c"] .tl-node{border-color:var(--track-c);background:var(--track-c)}.tl-done [data-track="d"] .tl-node{border-color:var(--track-d);background:var(--track-d)}
+    .tl-done [data-track="none"] .tl-node{border-color:var(--text-muted);background:var(--text-muted)}
+    .tl-todo [data-track="b"] .tl-node{border-color:var(--track-b)}.tl-todo [data-track="b-c"] .tl-node{border-color:var(--track-b)}
+    .tl-todo [data-track="c"] .tl-node{border-color:var(--track-c)}.tl-todo [data-track="d"] .tl-node{border-color:var(--track-d)}
+    .tl-todo .tl-entry::before{background:none;border-left:2px dashed var(--border);width:0}
+    .tl-status-badge--next{background:rgba(255,59,48,.1);color:var(--status-red)}.tl-status-badge--pending{background:rgba(255,159,10,.1);color:var(--status-yellow)}
+    .tl-status-badge--unknown{background:rgba(255,59,48,.1);color:var(--status-red)}.tl-status-badge--waiting{background:rgba(0,122,255,.1);color:var(--track-c)}
+    .tl-status-badge--blocked{background:rgba(142,142,147,.1);color:var(--status-gray)}.tl-status-badge--unanswered{background:rgba(255,159,10,.1);color:var(--status-yellow)}
+    .tl-status-badge--goal{background:rgba(255,59,48,.1);color:var(--status-red)}
+    .tl-divider{position:relative;padding:var(--space-lg) 0;padding-left:28px}
+    .tl-divider::before{content:'';position:absolute;left:5px;top:0;bottom:0;width:2px;background:var(--border)}
+    .tl-divider-inner{display:flex;align-items:center;gap:var(--space-sm)}
+    .tl-divider-label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--status-red);white-space:nowrap}
+    .tl-divider-line{flex:1;height:1px;background:var(--status-red);opacity:.25}
+    .tl-entry--goal .tl-node{width:16px;height:16px;left:-2px;border-width:3px;border-color:var(--track-d);animation:pulse 2.5s ease-in-out infinite}
+    .tl-entry--goal .tl-desc{font-size:17px;font-weight:700;color:var(--track-d)}
+    @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,59,48,.25)}50%{box-shadow:0 0 0 6px rgba(255,59,48,0)}}
+    .team-item{padding:var(--space-md) var(--space-lg);border-top:1px solid var(--border-light);display:flex;gap:var(--space-md);align-items:center}.team-item:first-child{border-top:none}
+    .team-avatar{width:40px;height:40px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;color:var(--text-secondary);flex-shrink:0}
+    .team-info{flex:1;min-width:0}.team-name{font-size:15px;font-weight:500}.team-role{font-size:13px;color:var(--text-secondary)}.team-status{font-size:12px;color:var(--text-muted);margin-top:2px}
+    details{background:var(--bg-card);border-radius:var(--radius-sm);margin-bottom:var(--space-sm);overflow:hidden}
+    summary{padding:var(--space-md) var(--space-lg);cursor:pointer;font-size:15px;font-weight:600;user-select:none;list-style:none;display:flex;align-items:center;justify-content:space-between}
+    summary::-webkit-details-marker{display:none}summary::after{content:'+';font-size:20px;font-weight:300;color:var(--text-muted);line-height:1}details[open] summary::after{content:'\2212'}
+    .guide-content{padding:0 var(--space-lg) var(--space-lg)}
+    .flow-list{list-style:none}.flow-step{position:relative;padding-left:28px;padding-bottom:var(--space-md)}
+    .flow-step::before{content:'';position:absolute;left:7px;top:0;bottom:0;width:2px;background:var(--border)}.flow-step:last-child::before{display:none}
+    .flow-step-icon{position:absolute;left:0;top:0;font-size:14px}.flow-step-text{font-size:14px}.flow-step-note{font-size:12px;color:var(--text-muted);display:block;margin-top:2px}
+    .contact-item{padding:var(--space-md) 0;border-top:1px solid var(--border-light)}.contact-item:first-child{border-top:none}
+    .contact-name{font-size:15px;font-weight:500}.contact-phone{font-family:var(--font-mono);font-size:14px;color:var(--track-c)}.contact-email{font-size:13px;color:var(--track-c)}.contact-desc{font-size:13px;color:var(--text-secondary);margin-top:2px}
+    .tip-item{padding:var(--space-md) 0;border-top:1px solid var(--border-light)}.tip-item:first-child{border-top:none}
+    .tip-number{font-family:var(--font-mono);font-size:12px;color:var(--text-muted)}.tip-title{font-size:15px;font-weight:600;display:block;margin-top:2px}.tip-body{font-size:14px;color:var(--text-secondary);line-height:1.45;margin-top:4px}
+    .property-detail-row{padding:var(--space-sm) var(--space-lg);display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--border-light);font-size:14px}.property-detail-row:first-child{border-top:none}
+    .property-key{color:var(--text-secondary)}.property-val{font-weight:500;text-align:right}
+    .property-sub-header{padding:var(--space-md) var(--space-lg) var(--space-xs);font-size:13px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.03em;border-top:1px solid var(--border-light)}
+    .site-footer{padding:var(--space-xl) 0 var(--space-2xl);text-align:center}
+    .footer-quote{font-size:15px;color:var(--text-secondary);font-style:italic;margin-bottom:var(--space-md)}.footer-credit{font-size:13px;color:var(--text-muted);line-height:1.5}.footer-updated{font-size:12px;color:var(--text-muted);margin-top:var(--space-sm);font-family:var(--font-mono)}
+    @media(min-width:520px){:root{--max-width:520px}}@media(min-width:768px){:root{--max-width:600px}}
   </style>
 </head>
 <body>
-
-  <!-- STATUS BAR -->
-  <div class="status-bar">
-    <span class="status-bar-dot"></span>
-    Stop Work Order Active Since Feb 17, 2026
-  </div>
-
-  <!-- NAV -->
-  <nav class="section-nav" aria-label="Sections">
-    <ul>
-      <li><a href="#calendar">Key Dates</a></li>
-      <li><a href="#timeline">Timeline</a></li>
-      <li><a href="#transactions">Payments</a></li>
-      <li><a href="#blockers">Blockers</a></li>
-      <li><a href="#team">Team</a></li>
-      <li><a href="#survival-guide">Guide</a></li>
-    </ul>
-  </nav>
-
+  <div class="status-bar"><span class="status-bar-dot"></span><span id="status-headline">Loading...</span></div>
+  <nav class="section-nav" aria-label="Sections"><ul>
+    <li><a href="#key-dates">Key Dates</a></li><li><a href="#timeline">Timeline</a></li><li><a href="#transactions">Payments</a></li>
+    <li><a href="#blockers">Blockers</a></li><li><a href="#team">Team</a></li><li><a href="#survival-guide">Guide</a></li>
+  </ul></nav>
   <div class="container">
-
-    <!-- HEADER -->
-    <header class="page-header">
-      <h1 class="page-title">SWOhell</h1>
-      <p class="page-subtitle">176 Johnson St, Unit 6A, Brooklyn</p>
-    </header>
-
-    <!-- ============================================
-         NEXT ACTION
-         ============================================ -->
-    <div class="next-action">
-      <div class="next-action-eyebrow">Next Action Required</div>
-      <div class="next-action-title">Go to 280 Broadway in person</div>
-      <div class="next-action-detail">Bring deed + government ID to push COC review for construction violation (39177526L). AEU says owner only &mdash; expediters cannot go.</div>
-      <div class="next-action-owner">Allan</div>
-    </div>
-
-    <!-- ============================================
-         STATS ROW
-         ============================================ -->
-    <div class="stats-row">
-      <div class="stat-card">
-        <div class="stat-label">Days Halted</div>
-        <div class="stat-value stat-value--red" id="days-since">50</div>
-        <div class="stat-sub">since Feb 17</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Next Deadline</div>
-        <div class="stat-value stat-value--small">Apr 18</div>
-        <div class="stat-sub">60-day compliance</div>
-      </div>
-    </div>
-
-    <!-- ============================================
-         KEY DATES TIMELINE
-         ============================================ -->
-    <div class="key-dates-card" id="calendar">
-      <div class="key-dates-title">Key Dates</div>
-      <ol class="kd-list">
-        <li class="kd-item">
-          <div class="kd-dot kd-dot--today"></div>
-          <div class="kd-date">Today &mdash; <span id="kd-today">Apr 8</span></div>
-          <div class="kd-label">Day <span id="kd-days">50</span> of Stop Work Order</div>
-        </li>
-        <li class="kd-item">
-          <div class="kd-dot kd-dot--red"></div>
-          <div class="kd-date">April 18</div>
-          <div class="kd-label">60-day compliance deadline. COC filed April 3 &mdash; likely met, but unconfirmed.</div>
-          <span class="kd-countdown kd-countdown--urgent" id="kd-apr18"></span>
-        </li>
-        <li class="kd-item">
-          <div class="kd-dot kd-dot--yellow"></div>
-          <div class="kd-date">May 1&ndash;8 (est.)</div>
-          <div class="kd-label">Expected COC review completion. 4&ndash;5 weeks from April 3 submission. Can be accelerated in person at 280 Broadway.</div>
-        </li>
-        <li class="kd-item">
-          <div class="kd-dot kd-dot--yellow"></div>
-          <div class="kd-date">May 6 &mdash; 8:30 AM</div>
-          <div class="kd-label">ECB Hearing: Construction violation 39177526L</div>
-          <span class="kd-countdown kd-countdown--warn" id="kd-may6a"></span>
-        </li>
-        <li class="kd-item">
-          <div class="kd-dot kd-dot--yellow"></div>
-          <div class="kd-date">May 6 &mdash; 10:30 AM</div>
-          <div class="kd-label">ECB Hearing: Electrical violation 39177537R (resolved, but hearing still scheduled)</div>
-        </li>
-        <li class="kd-item">
-          <div class="kd-dot kd-dot--blue"></div>
-          <div class="kd-date">May 31</div>
-          <div class="kd-label">Work permit #429322759 expires. Cannot use until SWO lifted.</div>
-          <span class="kd-countdown kd-countdown--info" id="kd-may31"></span>
-        </li>
-        <li class="kd-item">
-          <div class="kd-dot kd-dot--green"></div>
-          <div class="kd-date">TBD</div>
-          <div class="kd-label">Construction resumes &mdash; the goal.</div>
-        </li>
-      </ol>
-    </div>
-
-    <!-- ============================================
-         TRANSACTIONS (Payments)
-         ============================================ -->
-    <div class="card card--flush" id="transactions">
-      <div class="txn-header">
-        <div class="txn-title">Penalties &amp; Fees</div>
-        <div class="txn-total">$15,000+</div>
-      </div>
-      <ul class="txn-list">
-        <li class="txn-item">
-          <div class="txn-icon txn-icon--paid">&#x2705;</div>
-          <div class="txn-info">
-            <div class="txn-name">Electrical Civil Penalty</div>
-            <div class="txn-detail">Violation 39177537R &middot; Mar 27</div>
-          </div>
-          <div class="txn-amount-wrap">
-            <div class="txn-amount">$15,000</div>
-            <div class="txn-status txn-status--paid">Paid &middot; Allan &amp; Charlie</div>
-          </div>
-        </li>
-        <li class="txn-item">
-          <div class="txn-icon txn-icon--paid">&#x2705;</div>
-          <div class="txn-info">
-            <div class="txn-name">DOB Filing Fees</div>
-            <div class="txn-detail">Job B01341561-I1</div>
-          </div>
-          <div class="txn-amount-wrap">
-            <div class="txn-amount">$1,584.80</div>
-            <div class="txn-status txn-status--paid">Paid</div>
-          </div>
-        </li>
-        <li class="txn-item">
-          <div class="txn-icon txn-icon--pending">&#x23F3;</div>
-          <div class="txn-info">
-            <div class="txn-name">ECB Penalty &mdash; Electrical</div>
-            <div class="txn-detail">39177537R &middot; Hearing May 6</div>
-          </div>
-          <div class="txn-amount-wrap">
-            <div class="txn-amount">$2,500</div>
-            <div class="txn-status txn-status--pending">Balance</div>
-          </div>
-        </li>
-        <li class="txn-item">
-          <div class="txn-icon txn-icon--pending">&#x23F3;</div>
-          <div class="txn-info">
-            <div class="txn-name">ECB Penalty &mdash; Construction</div>
-            <div class="txn-detail">39177526L &middot; Hearing May 6</div>
-          </div>
-          <div class="txn-amount-wrap">
-            <div class="txn-amount">$2,500</div>
-            <div class="txn-status txn-status--pending">Pending</div>
-          </div>
-        </li>
-        <li class="txn-item">
-          <div class="txn-icon txn-icon--unknown">&#x2753;</div>
-          <div class="txn-info">
-            <div class="txn-name">GC Civil Penalty</div>
-            <div class="txn-detail">39177526L &middot; Review approved</div>
-          </div>
-          <div class="txn-amount-wrap">
-            <div class="txn-amount">TBD</div>
-            <div class="txn-status txn-status--unknown">Unknown &middot; Damian</div>
-          </div>
-        </li>
-        <li class="txn-item">
-          <div class="txn-icon txn-icon--unknown">&#x26A0;&#xFE0F;</div>
-          <div class="txn-info">
-            <div class="txn-name">If 60-Day Deadline Missed</div>
-            <div class="txn-detail">Penalty escalation</div>
-          </div>
-          <div class="txn-amount-wrap">
-            <div class="txn-amount" style="color: var(--status-red);">$5K+$1K/day</div>
-            <div class="txn-status txn-status--unknown">At risk</div>
-          </div>
-        </li>
-      </ul>
-
-      <!-- Displacement Rent -->
-      <div class="txn-header" style="border-top: 1px solid var(--border-light); padding-top: var(--space-lg);">
-        <div class="txn-title">Displacement Rent</div>
-        <div class="txn-total" id="rent-total">$4,800</div>
-      </div>
-      <div style="padding: 0 var(--space-lg) var(--space-sm); font-size:13px; color:var(--text-secondary);">$800/week since first week of March. Should have moved in March 1 &mdash; SWO made that impossible.</div>
-      <ul class="txn-list">
-        <li class="txn-item">
-          <div class="txn-icon txn-icon--paid">&#x1F3E0;</div>
-          <div class="txn-info">
-            <div class="txn-name">Week 1</div>
-            <div class="txn-detail">Mar 2&ndash;8</div>
-          </div>
-          <div class="txn-amount-wrap">
-            <div class="txn-amount">$800</div>
-            <div class="txn-status txn-status--paid">Paid &middot; Allan &amp; Charlie</div>
-          </div>
-        </li>
-        <li class="txn-item">
-          <div class="txn-icon txn-icon--paid">&#x1F3E0;</div>
-          <div class="txn-info">
-            <div class="txn-name">Week 2</div>
-            <div class="txn-detail">Mar 9&ndash;15</div>
-          </div>
-          <div class="txn-amount-wrap">
-            <div class="txn-amount">$800</div>
-            <div class="txn-status txn-status--paid">Paid &middot; Allan &amp; Charlie</div>
-          </div>
-        </li>
-        <li class="txn-item">
-          <div class="txn-icon txn-icon--paid">&#x1F3E0;</div>
-          <div class="txn-info">
-            <div class="txn-name">Week 3</div>
-            <div class="txn-detail">Mar 16&ndash;22</div>
-          </div>
-          <div class="txn-amount-wrap">
-            <div class="txn-amount">$800</div>
-            <div class="txn-status txn-status--paid">Paid &middot; Allan &amp; Charlie</div>
-          </div>
-        </li>
-        <li class="txn-item">
-          <div class="txn-icon txn-icon--paid">&#x1F3E0;</div>
-          <div class="txn-info">
-            <div class="txn-name">Week 4</div>
-            <div class="txn-detail">Mar 23&ndash;29</div>
-          </div>
-          <div class="txn-amount-wrap">
-            <div class="txn-amount">$800</div>
-            <div class="txn-status txn-status--paid">Paid &middot; Allan &amp; Charlie</div>
-          </div>
-        </li>
-        <li class="txn-item">
-          <div class="txn-icon txn-icon--paid">&#x1F3E0;</div>
-          <div class="txn-info">
-            <div class="txn-name">Week 5</div>
-            <div class="txn-detail">Mar 30&ndash;Apr 5</div>
-          </div>
-          <div class="txn-amount-wrap">
-            <div class="txn-amount">$800</div>
-            <div class="txn-status txn-status--paid">Paid &middot; Allan &amp; Charlie</div>
-          </div>
-        </li>
-        <li class="txn-item">
-          <div class="txn-icon txn-icon--paid">&#x1F3E0;</div>
-          <div class="txn-info">
-            <div class="txn-name">Week 6</div>
-            <div class="txn-detail">Apr 6&ndash;12</div>
-          </div>
-          <div class="txn-amount-wrap">
-            <div class="txn-amount">$800</div>
-            <div class="txn-status txn-status--paid">Paid &middot; Allan &amp; Charlie</div>
-          </div>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Out of pocket total -->
-    <div class="card card--flush">
-      <div class="numbers-item" style="padding-top: var(--space-lg);">
-        <span class="numbers-label" style="font-weight:600;">Total Out-of-Pocket Cost</span>
-        <span class="numbers-value numbers-value--red" id="total-oop"></span>
-      </div>
-      <div class="numbers-item">
-        <span class="numbers-label">Estimated Construction Cost</span>
-        <span class="numbers-value">$118,900</span>
-      </div>
-      <div class="numbers-item" style="padding-bottom: var(--space-lg);">
-        <span class="numbers-label" style="font-size:13px; color:var(--text-muted);">Construction cost is separate &mdash; total above is penalties + displacement rent only</span>
-        <span class="numbers-value"></span>
-      </div>
-    </div>
-
-    <!-- ============================================
-         BLOCKERS
-         ============================================ -->
-    <h2 class="section-label" id="blockers">Blockers</h2>
-    <div class="card card--flush">
-      <div class="blocker-item">
-        <div class="blocker-dot blocker-dot--yellow"></div>
-        <div>
-          <div class="blocker-name">Second COC approval (39177526L)</div>
-          <div class="blocker-detail">4&ndash;5 week AEU review from April 3. Go to 280 Broadway to speed up.</div>
-          <div class="blocker-owner">AEU / Allan (in-person)</div>
-        </div>
-      </div>
-      <div class="blocker-item">
-        <div class="blocker-dot blocker-dot--red"></div>
-        <div>
-          <div class="blocker-name">GC civil penalty payment</div>
-          <div class="blocker-detail">Review approved but payment status unclear. Damian has not confirmed.</div>
-          <div class="blocker-owner">Damian</div>
-        </div>
-      </div>
-      <div class="blocker-item">
-        <div class="blocker-dot blocker-dot--yellow"></div>
-        <div>
-          <div class="blocker-name">SWO rescission inspection</div>
-          <div class="blocker-detail">OBM has docs. Needs to schedule inspection.</div>
-          <div class="blocker-owner">OBM / Damian</div>
-        </div>
-      </div>
-      <div class="blocker-item">
-        <div class="blocker-dot blocker-dot--red"></div>
-        <div>
-          <div class="blocker-name">Can 6A restart with just 6A SWO rescind?</div>
-          <div class="blocker-detail">Attorney punted to expediter. Needs answer from Damian.</div>
-          <div class="blocker-owner">Damian</div>
-        </div>
-      </div>
-      <div class="blocker-item">
-        <div class="blocker-dot blocker-dot--gray"></div>
-        <div>
-          <div class="blocker-name">DOB inspector approval of new permit</div>
-          <div class="blocker-detail">Blocked until SWO lifted. Permit expires May 31.</div>
-          <div class="blocker-owner">DOB</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ============================================
-         TIMELINE
-         ============================================ -->
-    <h2 class="section-label" id="timeline">Timeline</h2>
-
-    <div class="tl-legend">
-      <div class="tl-legend-item"><span class="tl-legend-dot tl-legend-dot--a"></span> Electrical <span style="color:var(--track-a); font-weight:600; font-size:11px;">DONE</span></div>
-      <div class="tl-legend-item"><span class="tl-legend-dot tl-legend-dot--b"></span> Construction</div>
-      <div class="tl-legend-item"><span class="tl-legend-dot tl-legend-dot--c"></span> SWO Rescission</div>
-      <div class="tl-legend-item"><span class="tl-legend-dot tl-legend-dot--d"></span> Restart</div>
-    </div>
-
-    <div class="card" style="padding: var(--space-lg);">
-
-      <!-- DONE -->
-      <div class="tl-zone-label">Completed</div>
-      <ol class="tl-list tl-done">
-        <li class="tl-entry" data-track="a-b">
-          <div class="tl-node"></div>
-          <div><span class="tl-date">Feb 17</span><span class="tl-track">A + B</span></div>
-          <p class="tl-desc">Partial Stop Work Order issued. Two violations: electrical (39177537R) and construction (39177526L). 60-day compliance clock starts.</p>
-          <span class="tl-owner">DOB</span>
-        </li>
-        <li class="tl-entry" data-track="d">
-          <div class="tl-node"></div>
-          <div><span class="tl-date">Feb 18</span><span class="tl-track">D</span></div>
-          <p class="tl-desc">First work permit issued for 6A renovation.</p>
-          <span class="tl-owner">Pawel</span>
-        </li>
-        <li class="tl-entry" data-track="c">
-          <div class="tl-node"></div>
-          <div><span class="tl-date">Mar 5</span><span class="tl-track">C</span></div>
-          <p class="tl-desc">SWO cleared for commercial space (not 6A).</p>
-          <span class="tl-owner">DOB</span>
-        </li>
-        <li class="tl-entry" data-track="none">
-          <div class="tl-node"></div>
-          <div><span class="tl-date">Mar 6&ndash;7</span><span class="tl-track">&mdash;</span></div>
-          <p class="tl-desc">Allan meets with board members. Learns Jack Jaffa is an expeditor (not a law firm). ECB hearings are optional.</p>
-          <span class="tl-owner">Allan</span>
-        </li>
-        <li class="tl-entry" data-track="a">
-          <div class="tl-node"></div>
-          <div><span class="tl-date">Mar 14</span><span class="tl-track">A</span></div>
-          <p class="tl-desc">Electrical corrective work completed in 6A (BX wiring for lighting, receptacles, switches).</p>
-          <span class="tl-owner">Pawel / Wojciech</span>
-        </li>
-        <li class="tl-entry" data-track="a">
-          <div class="tl-node"></div>
-          <div><span class="tl-date">Mar 14</span><span class="tl-track">A</span></div>
-          <p class="tl-desc">First Certificate of Correction filed for electrical violation (COC0393020).</p>
-          <span class="tl-owner">Damian</span>
-        </li>
-        <li class="tl-entry" data-track="c">
-          <div class="tl-node"></div>
-          <div><span class="tl-date">Mar 14</span><span class="tl-track">C</span></div>
-          <p class="tl-desc">First request for SWO rescission inspection sent to DOB.</p>
-          <span class="tl-owner">Damian</span>
-        </li>
-        <li class="tl-entry" data-track="d">
-          <div class="tl-node"></div>
-          <div><span class="tl-date">Mar 17</span><span class="tl-track">D</span></div>
-          <p class="tl-desc">First work permit expires (no work possible under SWO anyway).</p>
-          <span class="tl-owner">&mdash;</span>
-        </li>
-        <li class="tl-entry" data-track="c">
-          <div class="tl-node"></div>
-          <div><span class="tl-date">Mar 17</span><span class="tl-track">C</span></div>
-          <p class="tl-desc">SWO rescission follow-up #2 sent to DOB.</p>
-          <span class="tl-owner">Damian</span>
-        </li>
-        <li class="tl-entry" data-track="a-b">
-          <div class="tl-node"></div>
-          <div><span class="tl-date">Mar 19</span><span class="tl-track">A + B</span></div>
-          <p class="tl-desc">Damian update: electrical CP paid, GC civil penalty still waiting on DOB for amount.</p>
-          <span class="tl-owner">Damian</span>
-        </li>
-        <li class="tl-entry" data-track="b-c">
-          <div class="tl-node"></div>
-          <div><span class="tl-date">Mar 25</span><span class="tl-track">B + C</span></div>
-          <p class="tl-desc">SWO rescission follow-up #3 sent to DOB. GC CP request now 13 business days with no response.</p>
-          <span class="tl-owner">Damian</span>
-        </li>
-        <li class="tl-entry" data-track="a">
-          <div class="tl-node"></div>
-          <div><span class="tl-date">Mar 27</span><span class="tl-track">A</span></div>
-          <p class="tl-desc">$15,000 electrical civil penalty paid via certified check to NYC DOB.</p>
-          <span class="tl-owner">Damian</span>
-        </li>
-        <li class="tl-entry" data-track="b">
-          <div class="tl-node"></div>
-          <div><span class="tl-date">Mar 28</span><span class="tl-track">B</span></div>
-          <p class="tl-desc">Second COC filed for construction violation (COC0395691) &mdash; summons 39177526L.</p>
-          <span class="tl-owner">Damian</span>
-        </li>
-        <li class="tl-entry" data-track="d">
-          <div class="tl-node"></div>
-          <div><span class="tl-date">Mar 30</span><span class="tl-track">D</span></div>
-          <p class="tl-desc">Allan asks attorney: &ldquo;Can 6A resume after just 6A SWO rescind, or must ALL SWOs clear?&rdquo;</p>
-          <span class="tl-owner">Allan</span>
-        </li>
-        <li class="tl-entry" data-track="a">
-          <div class="tl-node"></div>
-          <div><span class="tl-date">Apr 1</span><span class="tl-track">A</span></div>
-          <p class="tl-desc"><strong>First COC approved.</strong> Electrical violation 39177537R = RESOLVED in BIS.</p>
-          <span class="tl-owner">DOB / AEU</span>
-        </li>
-        <li class="tl-entry" data-track="b">
-          <div class="tl-node"></div>
-          <div><span class="tl-date">Apr 1</span><span class="tl-track">B</span></div>
-          <p class="tl-desc">Damian: &ldquo;Great! I will take care of the other one as well.&rdquo;</p>
-          <span class="tl-owner">Damian</span>
-        </li>
-        <li class="tl-entry" data-track="c">
-          <div class="tl-node"></div>
-          <div><span class="tl-date">Apr 2</span><span class="tl-track">C</span></div>
-          <p class="tl-desc">DOB asks Damian to send permits/applications/fees PDFs to OBM before scheduling rescission inspection.</p>
-          <span class="tl-owner">DOB</span>
-        </li>
-        <li class="tl-entry" data-track="d">
-          <div class="tl-node"></div>
-          <div><span class="tl-date">Apr 3</span><span class="tl-track">D</span></div>
-          <p class="tl-desc">New work permit issued (#429322759, expires May 31). Cannot use until SWO lifted.</p>
-          <span class="tl-owner">Pawel</span>
-        </li>
-        <li class="tl-entry" data-track="b">
-          <div class="tl-node"></div>
-          <div><span class="tl-date">Apr 3</span><span class="tl-track">B</span></div>
-          <p class="tl-desc">Second COC actually submitted to AEU (by Agnieszka Muczynski, not Damian).</p>
-          <span class="tl-owner">Agnieszka (Big Orange?)</span>
-        </li>
-        <li class="tl-entry" data-track="c">
-          <div class="tl-node"></div>
-          <div><span class="tl-date">Apr 6</span><span class="tl-track">C</span></div>
-          <p class="tl-desc">Damian confirms docs sent to OBM for rescission inspection.</p>
-          <span class="tl-owner">Damian</span>
-        </li>
-        <li class="tl-entry" data-track="none">
-          <div class="tl-node"></div>
-          <div><span class="tl-date">Apr 6</span><span class="tl-track">&mdash;</span></div>
-          <p class="tl-desc">Full status check-in email sent to entire team.</p>
-          <span class="tl-owner">Allan</span>
-        </li>
-        <li class="tl-entry" data-track="d">
-          <div class="tl-node"></div>
-          <div><span class="tl-date">Apr 7</span><span class="tl-track">D</span></div>
-          <p class="tl-desc">Attorney Eric Wohl: &ldquo;I can&rsquo;t speak to SWO removals. That&rsquo;s an expeditor question.&rdquo;</p>
-          <span class="tl-owner">Eric Wohl</span>
-        </li>
-        <li class="tl-entry" data-track="b">
-          <div class="tl-node"></div>
-          <div><span class="tl-date">Apr 7</span><span class="tl-track">B</span></div>
-          <p class="tl-desc">Allan finds on DOB NOW: GC civil penalty review (670218027) shows APPROVED.</p>
-          <span class="tl-owner">Allan</span>
-        </li>
-        <li class="tl-entry" data-track="b-c">
-          <div class="tl-node"></div>
-          <div><span class="tl-date">Apr 7</span><span class="tl-track">B + C</span></div>
-          <p class="tl-desc">Pawel speaks with Damian. Damian will follow up with DOB. Does NOT answer COC or penalty questions.</p>
-          <span class="tl-owner">Pawel / Damian</span>
-        </li>
-        <li class="tl-entry" data-track="b">
-          <div class="tl-node"></div>
-          <div><span class="tl-date">Apr 8</span><span class="tl-track">B</span></div>
-          <p class="tl-desc">Allan calls AEU x3. COC pending. Normal review: 4&ndash;5 weeks. Owner can go to 280 Broadway in person. Expediter CANNOT go.</p>
-          <span class="tl-owner">Allan</span>
-        </li>
-        <li class="tl-entry" data-track="c">
-          <div class="tl-node"></div>
-          <div><span class="tl-date">Apr 8</span><span class="tl-track">C</span></div>
-          <p class="tl-desc">Allan calls OBM. They don&rsquo;t see April 18 deadline &mdash; only May 6 hearing.</p>
-          <span class="tl-owner">Allan</span>
-        </li>
-        <li class="tl-entry" data-track="c">
-          <div class="tl-node"></div>
-          <div><span class="tl-date">Apr 8</span><span class="tl-track">C</span></div>
-          <p class="tl-desc">Allan emails OBM supervisor re: SWO rescission requirements.</p>
-          <span class="tl-owner">Allan</span>
-        </li>
-      </ol>
-
-      <!-- TODAY DIVIDER -->
-      <div class="tl-divider">
-        <div class="tl-divider-inner">
-          <span class="tl-divider-label">Today &mdash; <span id="today-date">April 8, 2026</span></span>
-          <div class="tl-divider-line"></div>
-        </div>
-      </div>
-
-      <!-- TODO -->
-      <div class="tl-zone-label">Remaining Steps</div>
-      <ol class="tl-list tl-todo">
-        <li class="tl-entry" data-track="b">
-          <div class="tl-node"></div>
-          <div><span class="tl-step">#1</span><span class="tl-track">B</span><span class="tl-status-badge tl-status-badge--next">Next</span></div>
-          <p class="tl-desc">Allan goes to 280 Broadway with deed + ID to push COC review.</p>
-          <span class="tl-owner">Allan</span>
-        </li>
-        <li class="tl-entry" data-track="b">
-          <div class="tl-node"></div>
-          <div><span class="tl-step">#2</span><span class="tl-track">B</span><span class="tl-status-badge tl-status-badge--unanswered">Unanswered</span></div>
-          <p class="tl-desc">Confirm with Damian: has GC civil penalty been paid?</p>
-          <span class="tl-owner">Allan / Damian</span>
-        </li>
-        <li class="tl-entry" data-track="b">
-          <div class="tl-node"></div>
-          <div><span class="tl-step">#3</span><span class="tl-track">B</span><span class="tl-status-badge tl-status-badge--unanswered">Unanswered</span></div>
-          <p class="tl-desc">Confirm: who is Agnieszka Muczynski? Was COC resubmitted April 3?</p>
-          <span class="tl-owner">Allan / Damian</span>
-        </li>
-        <li class="tl-entry" data-track="b">
-          <div class="tl-node"></div>
-          <div><span class="tl-step">#4</span><span class="tl-track">B</span><span class="tl-status-badge tl-status-badge--pending">Pending</span></div>
-          <p class="tl-desc">Second COC approved by AEU (COC0395691 for 39177526L).</p>
-          <span class="tl-owner">AEU</span>
-          <span class="tl-dep">4&ndash;5 week review from April 3</span>
-        </li>
-        <li class="tl-entry" data-track="b">
-          <div class="tl-node"></div>
-          <div><span class="tl-step">#5</span><span class="tl-track">B</span><span class="tl-status-badge tl-status-badge--unknown">Unknown</span></div>
-          <p class="tl-desc">GC civil penalty paid (if not already).</p>
-          <span class="tl-owner">Damian</span>
-        </li>
-        <li class="tl-entry" data-track="c">
-          <div class="tl-node"></div>
-          <div><span class="tl-step">#6</span><span class="tl-track">C</span><span class="tl-status-badge tl-status-badge--waiting">Waiting</span></div>
-          <p class="tl-desc">OBM supervisor responds re: SWO rescission requirements.</p>
-          <span class="tl-owner">OBM</span>
-        </li>
-        <li class="tl-entry" data-track="b-c">
-          <div class="tl-node"></div>
-          <div><span class="tl-step">#7</span><span class="tl-track">B + C</span><span class="tl-status-badge tl-status-badge--unanswered">Unanswered</span></div>
-          <p class="tl-desc">Does COC need approval before SWO can be lifted?</p>
-          <span class="tl-owner">OBM</span>
-        </li>
-        <li class="tl-entry" data-track="c">
-          <div class="tl-node"></div>
-          <div><span class="tl-step">#8</span><span class="tl-track">C</span><span class="tl-status-badge tl-status-badge--waiting">Waiting</span></div>
-          <p class="tl-desc">OBM schedules SWO rescission inspection.</p>
-          <span class="tl-owner">OBM</span>
-        </li>
-        <li class="tl-entry" data-track="c">
-          <div class="tl-node"></div>
-          <div><span class="tl-step">#9</span><span class="tl-track">C</span><span class="tl-status-badge tl-status-badge--blocked">Blocked</span></div>
-          <p class="tl-desc">DOB inspector visits &mdash; SWO rescinded for 6A.</p>
-          <span class="tl-owner">DOB</span>
-          <span class="tl-dep">Blocked by #8</span>
-        </li>
-        <li class="tl-entry" data-track="d">
-          <div class="tl-node"></div>
-          <div><span class="tl-step">#10</span><span class="tl-track">D</span><span class="tl-status-badge tl-status-badge--unanswered">Unanswered</span></div>
-          <p class="tl-desc">Can 6A resume after just 6A SWO rescind?</p>
-          <span class="tl-owner">Damian</span>
-        </li>
-        <li class="tl-entry" data-track="d">
-          <div class="tl-node"></div>
-          <div><span class="tl-step">#11</span><span class="tl-track">D</span><span class="tl-status-badge tl-status-badge--blocked">Blocked</span></div>
-          <p class="tl-desc">DOB inspection of new work permit.</p>
-          <span class="tl-owner">DOB</span>
-          <span class="tl-dep">Blocked by #9</span>
-        </li>
-        <li class="tl-entry tl-entry--goal" data-track="d">
-          <div class="tl-node"></div>
-          <div><span class="tl-step">#12</span><span class="tl-track">D</span></div>
-          <p class="tl-desc">CONSTRUCTION RESUMES</p>
-          <span class="tl-owner">Pawel &mdash; THE GOAL</span>
-        </li>
-      </ol>
-
-    </div>
-
-    <!-- ============================================
-         TEAM
-         ============================================ -->
-    <h2 class="section-label" id="team">Team</h2>
-    <div class="card card--flush">
-      <div class="team-item">
-        <div class="team-avatar">AH</div>
-        <div class="team-info">
-          <div class="team-name">Allan Holmes</div>
-          <div class="team-role">Owner</div>
-          <div class="team-status">Going to 280 Broadway, calling AEU/OBM, pushing process</div>
-        </div>
-      </div>
-      <div class="team-item">
-        <div class="team-avatar">CF</div>
-        <div class="team-info">
-          <div class="team-name">Charlie Filson-Dineen</div>
-          <div class="team-role">Owner</div>
-          <div class="team-status">Co-owner. Design decisions, CC'd on all threads</div>
-        </div>
-      </div>
-      <div class="team-item">
-        <div class="team-avatar">PU</div>
-        <div class="team-info">
-          <div class="team-name">Pawel Uradominki</div>
-          <div class="team-role">GC &middot; QuestArt Construction</div>
-          <div class="team-status">Waiting on SWO lift to resume work</div>
-        </div>
-      </div>
-      <div class="team-item">
-        <div class="team-avatar">DM</div>
-        <div class="team-info">
-          <div class="team-name">Damian Michalak</div>
-          <div class="team-role">Expediter &middot; Big Orange</div>
-          <div class="team-status">Filed COCs, managing DOB. Key questions unanswered</div>
-        </div>
-      </div>
-      <div class="team-item">
-        <div class="team-avatar">EP</div>
-        <div class="team-info">
-          <div class="team-name">Eugene Seungho Park</div>
-          <div class="team-role">Architect &middot; KYSH</div>
-          <div class="team-status">Rev.1 drawings ready pending sign-off</div>
-        </div>
-      </div>
-      <div class="team-item">
-        <div class="team-avatar">EW</div>
-        <div class="team-info">
-          <div class="team-name">Eric M. Wohl</div>
-          <div class="team-role">Attorney &middot; Fox Rothschild LLP</div>
-          <div class="team-status">Deflected restart question to expediter</div>
-        </div>
-      </div>
-      <div class="team-item">
-        <div class="team-avatar">BA</div>
-        <div class="team-info">
-          <div class="team-name">Blessing Anosike</div>
-          <div class="team-role">Board Expediter &middot; Jack Jaffa</div>
-          <div class="team-status">20+ years with building</div>
-        </div>
-      </div>
-      <div class="team-item">
-        <div class="team-avatar">BH</div>
-        <div class="team-info">
-          <div class="team-name">Brian Hausman</div>
-          <div class="team-role">Property Mgr &middot; TKR Property Services</div>
-          <div class="team-status">Building access, permit posting</div>
-        </div>
-      </div>
-      <div class="team-item">
-        <div class="team-avatar">WB</div>
-        <div class="team-info">
-          <div class="team-name">Wojciech Baldyga</div>
-          <div class="team-role">Electrician &middot; Modern Voltage NYC</div>
-          <div class="team-status">Completed electrical corrections</div>
-        </div>
-      </div>
-      <div class="team-item">
-        <div class="team-avatar">AM</div>
-        <div class="team-info">
-          <div class="team-name">Agnieszka Muczynski</div>
-          <div class="team-role">COC Submitter &middot; Unknown (Big Orange?)</div>
-          <div class="team-status">Submitted COC on April 3. Identity unconfirmed</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ============================================
-         SURVIVAL GUIDE
-         ============================================ -->
-    <h2 class="section-label" id="survival-guide">SWO Survival Guide</h2>
-    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: var(--space-md);">For other NYC homeowners going through this. Everything we learned the hard way.</p>
-
-    <details>
-      <summary>Process Flowchart</summary>
-      <div class="guide-content">
-        <ol class="flow-list">
-          <li class="flow-step"><span class="flow-step-icon">&#x1F6A8;</span><span class="flow-step-text">Violation issued (DOB inspection)</span></li>
-          <li class="flow-step"><span class="flow-step-icon">&#x1F6D1;</span><span class="flow-step-text">Stop Work Order (partial or full)</span></li>
-          <li class="flow-step"><span class="flow-step-icon">&#x1F4DE;</span><span class="flow-step-text">Hire expediter</span></li>
-          <li class="flow-step"><span class="flow-step-icon">&#x1F527;</span><span class="flow-step-text">Complete corrective work</span></li>
-          <li class="flow-step"><span class="flow-step-icon">&#x1F4C4;</span><span class="flow-step-text">File Certificate of Correction (COC) with AEU</span></li>
-          <li class="flow-step"><span class="flow-step-icon">&#x1F4B0;</span><span class="flow-step-text">Pay civil penalties</span></li>
-          <li class="flow-step"><span class="flow-step-icon">&#x23F3;</span><span class="flow-step-text">COC reviewed by AEU (4&ndash;5 weeks)</span><span class="flow-step-note">Or go in person to 280 Broadway (owner only, deed + ID)</span></li>
-          <li class="flow-step"><span class="flow-step-icon">&#x2705;</span><span class="flow-step-text">COC approved &rarr; violation resolved</span></li>
-          <li class="flow-step"><span class="flow-step-icon">&#x1F4E8;</span><span class="flow-step-text">Submit docs to OBM for SWO rescission</span></li>
-          <li class="flow-step"><span class="flow-step-icon">&#x1F4C5;</span><span class="flow-step-text">OBM schedules rescission inspection</span></li>
-          <li class="flow-step"><span class="flow-step-icon">&#x1F50D;</span><span class="flow-step-text">DOB inspector visits &rarr; SWO lifted</span></li>
-          <li class="flow-step"><span class="flow-step-icon">&#x1F3D7;&#xFE0F;</span><span class="flow-step-text"><strong>Construction resumes</strong></span></li>
-        </ol>
-        <p style="margin-top: var(--space-md); padding: var(--space-md); background: rgba(0,122,255,0.06); border-radius: var(--radius-xs); font-size: 14px; color: var(--track-c);">
-          <strong>Key insight:</strong> COC approval and SWO rescission may be INDEPENDENT tracks. You might not need the COC approved before the SWO can be lifted. Confirm with OBM.
-        </p>
-      </div>
-    </details>
-
-    <details>
-      <summary>Who To Call</summary>
-      <div class="guide-content">
-        <div class="contact-item">
-          <div class="contact-name">AEU (Administrative Enforcement Unit)</div>
-          <div class="contact-phone">(212) 393-2405</div>
-          <div class="contact-desc">COC review status, civil penalty status</div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-name">OBM (Office of Building Marshal)</div>
-          <div class="contact-phone">(212) 393-2930</div>
-          <div class="contact-email">OBMSWO@buildings.nyc.gov</div>
-          <div class="contact-desc">SWO rescission, inspection scheduling</div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-name">Brooklyn Construction Enforcement</div>
-          <div class="contact-phone">(718) 802-3684</div>
-          <div class="contact-email">BKConstEnf@buildings.nyc.gov</div>
-          <div class="contact-desc">SWO reinspection (Brooklyn)</div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-name">SWO Re-inspection Appointments</div>
-          <div class="contact-phone">(212) 393-2662</div>
-          <div class="contact-email">cseappointments@buildings.nyc.gov</div>
-          <div class="contact-desc">Formal appointment requests</div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-name">Brooklyn DOB Borough Office</div>
-          <div class="contact-phone">(718) 802-3675</div>
-          <div class="contact-desc">General customer service</div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-name">NYC 311</div>
-          <div class="contact-phone">311</div>
-          <div class="contact-desc">General services, DOB transfers &middot; 24/7</div>
-        </div>
-        <p style="margin-top: var(--space-md); font-size: 12px; color: var(--text-muted);">Hours: M&ndash;F 8:30 AM &ndash; 4:30 PM unless noted</p>
-      </div>
-    </details>
-
-    <details>
-      <summary>10 Things I Learned</summary>
-      <div class="guide-content">
-        <div class="tip-item">
-          <div class="tip-number">01</div>
-          <span class="tip-title">Your expediter can&rsquo;t do everything.</span>
-          <span class="tip-body">Two out of three AEU reps told me only the owner can go to 280 Broadway in person to speed up a COC review. Bring your deed and ID. Don&rsquo;t assume your expediter is handling it &mdash; verify.</span>
-        </div>
-        <div class="tip-item">
-          <div class="tip-number">02</div>
-          <span class="tip-title">Call multiple times.</span>
-          <span class="tip-body">I called AEU three times and got different info each time. One rep said my expediter could come. Two said only the owner. Triangulate.</span>
-        </div>
-        <div class="tip-item">
-          <div class="tip-number">03</div>
-          <span class="tip-title">COC and SWO may be separate tracks.</span>
-          <span class="tip-body">AEU reviews your COC. OBM handles the SWO. One rep told me they don&rsquo;t think COC approval is needed before the SWO can be lifted. Push both simultaneously.</span>
-        </div>
-        <div class="tip-item">
-          <div class="tip-number">04</div>
-          <span class="tip-title">The 60-day deadline may be for filing, not approval.</span>
-          <span class="tip-body">Neither AEU nor OBM flagged our April 18 date as a crisis. The COC was filed before the deadline. The May 6 ECB hearing is where penalties get adjudicated.</span>
-        </div>
-        <div class="tip-item">
-          <div class="tip-number">05</div>
-          <span class="tip-title">DOB gets frustrated with too many follow-ups.</span>
-          <span class="tip-body">My contractor warned me: expediters can push to a point, then DOB pushes back. Balance persistence with patience.</span>
-        </div>
-        <div class="tip-item">
-          <div class="tip-number">06</div>
-          <span class="tip-title">Check DOB NOW yourself.</span>
-          <span class="tip-body">Don&rsquo;t wait for your expediter. Go to the DOB NOW portal and look up your property. I found my civil penalty review was approved before anyone told me.</span>
-        </div>
-        <div class="tip-item">
-          <div class="tip-number">07</div>
-          <span class="tip-title">Go to 280 Broadway.</span>
-          <span class="tip-body">If your COC review is taking too long, go in person. 280 Broadway, lower Manhattan, 8:30&ndash;3:45 weekdays. Deed + government ID. Highest-impact move an owner can make.</span>
-        </div>
-        <div class="tip-item">
-          <div class="tip-number">08</div>
-          <span class="tip-title">Document everything.</span>
-          <span class="tip-body">Every call, text, email. I built this entire site because it&rsquo;s the only way to track what&rsquo;s happening across 10+ people and 3 government agencies.</span>
-        </div>
-        <div class="tip-item">
-          <div class="tip-number">09</div>
-          <span class="tip-title">Know AEU vs. OBM vs. ECB.</span>
-          <span class="tip-body">AEU reviews your Certificate of Correction. OBM handles SWO rescission and inspections. ECB handles hearings and penalty adjudication. They&rsquo;re separate.</span>
-        </div>
-        <div class="tip-item">
-          <div class="tip-number">10</div>
-          <span class="tip-title">Jack Jaffa is an expeditor, not a law firm.</span>
-          <span class="tip-body">Despite the name, Jack Jaffa &amp; Associates handles DOB paperwork. Legal defense is separate.</span>
-        </div>
-      </div>
-    </details>
-
-    <!-- ============================================
-         PROPERTY DETAILS
-         ============================================ -->
-    <h2 class="section-label" id="property">Property Details</h2>
-    <div class="card card--flush">
-      <div class="property-sub-header">Property</div>
-      <div class="property-detail-row"><span class="property-key">Address</span><span class="property-val">176 Johnson St, 6A, Brooklyn 11201</span></div>
-      <div class="property-detail-row"><span class="property-key">BIN</span><span class="property-val">3058206</span></div>
-      <div class="property-detail-row"><span class="property-key">Block / Lot</span><span class="property-val">2049 / 7501</span></div>
-      <div class="property-detail-row"><span class="property-key">Job Filing</span><span class="property-val">B01341561-I1</span></div>
-
-      <div class="property-sub-header">Electrical Violation <span style="color:var(--track-a); font-weight:700;">RESOLVED</span></div>
-      <div class="property-detail-row"><span class="property-key">Summons</span><span class="property-val">39177537R</span></div>
-      <div class="property-detail-row"><span class="property-key">COC</span><span class="property-val">COC0393020 &mdash; Approved</span></div>
-      <div class="property-detail-row"><span class="property-key">Penalty</span><span class="property-val">$15,000 paid</span></div>
-
-      <div class="property-sub-header">Construction Violation <span style="color:var(--track-b); font-weight:700;">ACTIVE</span></div>
-      <div class="property-detail-row"><span class="property-key">Summons</span><span class="property-val">39177526L</span></div>
-      <div class="property-detail-row"><span class="property-key">COC</span><span class="property-val">COC0395691 &mdash; In Review</span></div>
-      <div class="property-detail-row"><span class="property-key">Deadline</span><span class="property-val">April 18, 2026</span></div>
-
-      <div class="property-sub-header">Professionals</div>
-      <div class="property-detail-row"><span class="property-key">Architect</span><span class="property-val">Seungho Park, RA #044332</span></div>
-      <div class="property-detail-row"><span class="property-key">Contractor</span><span class="property-val">Pawel Urdominski</span></div>
-      <div class="property-detail-row" style="padding-bottom: var(--space-lg);"><span class="property-key">Expediter</span><span class="property-val">Damian Michalak, #008307</span></div>
-    </div>
-
-  </div><!-- /container -->
-
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="container">
-      <p class="footer-quote">&ldquo;If you&rsquo;re going through SWO hell, keep going.&rdquo;</p>
-      <p class="footer-credit">
-        Built by <strong>Allan Holmes</strong> &amp; <strong>Charlie Filson-Dineen</strong><br>
-        during a renovation that won&rsquo;t end.<br>
-        <a href="mailto:allan.holmes@me.com">allan.holmes@me.com</a>
-      </p>
-      <p class="footer-updated">Last updated <span id="last-updated"></span></p>
-    </div>
-  </footer>
-
+    <header class="page-header"><h1 class="page-title">SWOhell</h1><p class="page-subtitle">176 Johnson St, Unit 6A, Brooklyn</p></header>
+    <div id="next-action-slot"></div>
+    <div id="stats-slot"></div>
+    <div id="key-dates-slot"></div>
+    <div id="transactions-slot"></div>
+    <div id="blockers-slot"></div>
+    <div id="timeline-slot"></div>
+    <div id="team-slot"></div>
+    <div id="guide-slot"></div>
+    <div id="property-slot"></div>
+  </div>
+  <footer class="site-footer"><div class="container">
+    <p class="footer-quote" id="footer-quote"></p>
+    <p class="footer-credit" id="footer-credit"></p>
+    <p class="footer-updated">Last updated <span id="last-updated"></span></p>
+  </div></footer>
   <script>
-    (function () {
-      var swoDate = new Date('2026-02-17T00:00:00');
-      var now = new Date();
-      var days = Math.floor((now - swoDate) / 86400000);
-      var el = document.getElementById('days-since');
-      if (el && days > 0) el.textContent = days;
+  (function(){
+    var now=new Date(),fmt={month:'long',day:'numeric',year:'numeric'},fmtS={month:'short',day:'numeric'};
+    function dB(a,b){return Math.ceil((b-a)/864e5)}
+    function esc(s){if(!s)return'';var d=document.createElement('div');d.textContent=s;return d.innerHTML}
+    function row(k,v){return'<div class="property-detail-row"><span class="property-key">'+esc(k)+'</span><span class="property-val">'+esc(v)+'</span></div>'}
 
-      var fmt = { month: 'long', day: 'numeric', year: 'numeric' };
-      var todayEl = document.getElementById('today-date');
-      if (todayEl) todayEl.textContent = now.toLocaleDateString('en-US', fmt);
+    fetch('data.json?v='+Date.now()).then(function(r){return r.json()}).then(render).catch(function(e){
+      document.getElementById('next-action-slot').innerHTML='<div class="card" style="text-align:center;color:var(--text-muted)">Failed to load data: '+esc(e.message)+'</div>';
+    });
 
-      var updEl = document.getElementById('last-updated');
-      if (updEl) updEl.textContent = now.toLocaleDateString('en-US', fmt);
+    function render(d){
+      document.getElementById('status-headline').textContent=d.status.headline;
+      var swoDate=new Date(d.status.swoDate+'T00:00:00'),daysSince=Math.max(0,dB(swoDate,now));
 
-      // Key dates countdowns
-      var kdDays = document.getElementById('kd-days');
-      if (kdDays && days > 0) kdDays.textContent = days;
+      // Next action
+      document.getElementById('next-action-slot').innerHTML='<div class="next-action"><div class="next-action-eyebrow">Next Action Required</div><div class="next-action-title">'+esc(d.nextAction.title)+'</div><div class="next-action-detail">'+esc(d.nextAction.detail)+'</div><div class="next-action-owner">'+esc(d.nextAction.owner)+'</div></div>';
 
-      var kdToday = document.getElementById('kd-today');
-      if (kdToday) kdToday.textContent = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      // Stats
+      document.getElementById('stats-slot').innerHTML='<div class="stats-row"><div class="stat-card"><div class="stat-label">Days Halted</div><div class="stat-value stat-value--red">'+daysSince+'</div><div class="stat-sub">since '+swoDate.toLocaleDateString('en-US',fmtS)+'</div></div><div class="stat-card"><div class="stat-label">Next Deadline</div><div class="stat-value stat-value--small">'+esc(d.status.nextDeadline)+'</div><div class="stat-sub">'+esc(d.status.nextDeadlineLabel)+'</div></div></div>';
 
-      function daysUntil(dateStr) {
-        return Math.ceil((new Date(dateStr) - now) / 86400000);
-      }
+      // Key dates
+      var h='<div class="card" id="key-dates"><div style="font-family:var(--font-heading);font-size:17px;font-weight:600;margin-bottom:var(--space-lg)">Key Dates</div><ol class="kd-list">';
+      h+='<li class="kd-item"><div class="kd-dot kd-dot--today"></div><div class="kd-date">Today — '+now.toLocaleDateString('en-US',fmtS)+'</div><div class="kd-label">Day '+daysSince+' of Stop Work Order</div></li>';
+      d.keyDates.forEach(function(k){
+        h+='<li class="kd-item"><div class="kd-dot kd-dot--'+k.color+'"></div><div class="kd-date">'+esc(k.label)+'</div><div class="kd-label">'+esc(k.desc)+'</div>';
+        if(k.countdown&&k.date){var dt=dB(now,new Date(k.date+'T00:00:00'));h+='<span class="kd-countdown kd-countdown--'+k.color+'">'+(dt>0?dt+' days away':dt===0?'Today':Math.abs(dt)+' days ago')+'</span>';}
+        h+='</li>';
+      });
+      h+='</ol></div>';
+      document.getElementById('key-dates-slot').innerHTML=h;
 
-      function setCountdown(id, dateStr, label) {
-        var el = document.getElementById(id);
-        if (!el) return;
-        var d = daysUntil(dateStr);
-        if (d > 0) el.textContent = d + ' days ' + label;
-        else if (d === 0) el.textContent = 'Today';
-        else el.textContent = Math.abs(d) + ' days ago';
-      }
+      // Transactions
+      var paidTotal=0;d.penalties.forEach(function(p){if(p.status==='paid')paidTotal+=p.amountNum});
+      var rentTotal=0;d.rent.weeks.forEach(function(w){rentTotal+=w.amount});
+      var oopTotal=paidTotal+rentTotal;
+      h='<div class="card card--flush" id="transactions"><div class="txn-header"><div class="txn-title">Penalties &amp; Fees</div><div class="txn-total">$'+paidTotal.toLocaleString()+'+</div></div>';
+      d.penalties.forEach(function(p){
+        h+='<div class="txn-item"><div class="txn-icon txn-icon--'+p.status+'">'+p.icon+'</div><div class="txn-info"><div class="txn-name">'+esc(p.name)+'</div><div class="txn-detail">'+esc(p.detail)+'</div></div><div class="txn-amount-wrap"><div class="txn-amount"'+(p.status==='unknown'?' style="color:var(--status-red)"':'')+'>'+esc(p.amount)+'</div><div class="txn-status txn-status--'+p.status+'">'+(p.status==='paid'?'Paid':p.status==='pending'?'Pending':'Unknown')+(p.who?' · '+esc(p.who):'')+'</div></div></div>';
+      });
+      h+='<div class="txn-header" style="border-top:1px solid var(--border-light);padding-top:var(--space-lg)"><div class="txn-title">Displacement Rent</div><div class="txn-total">$'+rentTotal.toLocaleString()+'</div></div>';
+      h+='<div style="padding:0 var(--space-lg) var(--space-sm);font-size:13px;color:var(--text-secondary)">'+esc(d.rent.description)+'</div>';
+      d.rent.weeks.forEach(function(w){
+        h+='<div class="txn-item"><div class="txn-icon txn-icon--paid">🏠</div><div class="txn-info"><div class="txn-name">'+esc(w.label)+'</div><div class="txn-detail">'+esc(w.dates)+'</div></div><div class="txn-amount-wrap"><div class="txn-amount">$'+w.amount+'</div><div class="txn-status txn-status--paid">Paid · Allan &amp; Charlie</div></div></div>';
+      });
+      h+='</div>';
+      h+='<div class="card card--flush"><div class="numbers-item" style="padding-top:var(--space-lg)"><span class="numbers-label" style="font-weight:600">Total Out-of-Pocket Cost</span><span class="numbers-value numbers-value--red">$'+oopTotal.toLocaleString()+'</span></div>';
+      h+='<div class="numbers-item"><span class="numbers-label">Estimated Construction Cost</span><span class="numbers-value">'+esc(d.property.constructionCost)+'</span></div>';
+      h+='<div class="numbers-item" style="padding-bottom:var(--space-lg)"><span class="numbers-label" style="font-size:13px;color:var(--text-muted)">Construction cost is separate — total above is penalties + displacement rent only</span><span class="numbers-value"></span></div></div>';
+      document.getElementById('transactions-slot').innerHTML=h;
 
-      setCountdown('kd-apr18', '2026-04-18', 'away');
-      setCountdown('kd-may6a', '2026-05-06', 'away');
-      setCountdown('kd-may31', '2026-05-31', 'away');
+      // Blockers
+      h='<h2 class="section-label" id="blockers">Blockers</h2><div class="card card--flush">';
+      d.blockers.forEach(function(b){h+='<div class="blocker-item"><div class="blocker-dot blocker-dot--'+b.severity+'"></div><div><div class="blocker-name">'+esc(b.name)+'</div><div class="blocker-detail">'+esc(b.detail)+'</div><div class="blocker-owner">'+esc(b.owner)+'</div></div></div>';});
+      h+='</div>';document.getElementById('blockers-slot').innerHTML=h;
 
-      // Calculate total out-of-pocket
-      // Penalties paid: $15,000 (electrical CP) + $1,584.80 (filing fees)
-      var penalties = 15000 + 1584.80;
-      // Displacement rent: $800/week from Mar 2 to now
-      var rentStart = new Date('2026-03-02T00:00:00');
-      var weeksDisplaced = Math.ceil((now - rentStart) / (7 * 86400000));
-      if (weeksDisplaced < 1) weeksDisplaced = 1;
-      var rentTotal = weeksDisplaced * 800;
-      var totalOop = penalties + rentTotal;
+      // Timeline
+      h='<h2 class="section-label" id="timeline">Timeline</h2><div class="tl-legend">';
+      h+='<div class="tl-legend-item"><span class="tl-legend-dot tl-legend-dot--a"></span> Electrical <span style="color:var(--track-a);font-weight:600;font-size:11px">DONE</span></div>';
+      h+='<div class="tl-legend-item"><span class="tl-legend-dot tl-legend-dot--b"></span> Construction</div>';
+      h+='<div class="tl-legend-item"><span class="tl-legend-dot tl-legend-dot--c"></span> SWO Rescission</div>';
+      h+='<div class="tl-legend-item"><span class="tl-legend-dot tl-legend-dot--d"></span> Restart</div></div>';
+      h+='<div class="card" style="padding:var(--space-lg)"><div class="tl-zone-label">Completed</div><ol class="tl-list tl-done">';
+      d.timelineDone.forEach(function(e){
+        h+='<li class="tl-entry" data-track="'+e.track+'"><div class="tl-node"></div><div><span class="tl-date">'+esc(e.date)+'</span><span class="tl-track">'+esc(e.trackLabel)+'</span></div><p class="tl-desc">'+e.desc+'</p><span class="tl-owner">'+esc(e.owner)+'</span></li>';
+      });
+      h+='</ol><div class="tl-divider"><div class="tl-divider-inner"><span class="tl-divider-label">Today — '+now.toLocaleDateString('en-US',fmt)+'</span><div class="tl-divider-line"></div></div></div>';
+      h+='<div class="tl-zone-label">Remaining Steps</div><ol class="tl-list tl-todo">';
+      d.timelineTodo.forEach(function(e){
+        var g=e.status==='goal';
+        h+='<li class="tl-entry'+(g?' tl-entry--goal':'')+'" data-track="'+e.track+'"><div class="tl-node"></div><div><span class="tl-step">#'+e.step+'</span><span class="tl-track">'+esc(e.trackLabel)+'</span>';
+        if(!g)h+='<span class="tl-status-badge tl-status-badge--'+e.status+'">'+esc(e.status.charAt(0).toUpperCase()+e.status.slice(1))+'</span>';
+        h+='</div><p class="tl-desc">'+esc(e.desc)+'</p><span class="tl-owner">'+esc(e.owner)+'</span>';
+        if(e.dep)h+='<span class="tl-dep">'+esc(e.dep)+'</span>';
+        h+='</li>';
+      });
+      h+='</ol></div>';document.getElementById('timeline-slot').innerHTML=h;
 
-      var totalEl = document.getElementById('total-oop');
-      if (totalEl) totalEl.textContent = '$' + totalOop.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+      // Team
+      h='<h2 class="section-label" id="team">Team</h2><div class="card card--flush">';
+      d.team.forEach(function(t){h+='<div class="team-item"><div class="team-avatar">'+esc(t.initials)+'</div><div class="team-info"><div class="team-name">'+esc(t.name)+'</div><div class="team-role">'+esc(t.role)+'</div><div class="team-status">'+esc(t.status)+'</div></div></div>';});
+      h+='</div>';document.getElementById('team-slot').innerHTML=h;
 
-      var rentTotalEl = document.getElementById('rent-total');
-      if (rentTotalEl) rentTotalEl.textContent = '$' + rentTotal.toLocaleString('en-US');
-    })();
+      // Survival guide
+      var sg=d.survivalGuide;
+      h='<h2 class="section-label" id="survival-guide">SWO Survival Guide</h2><p style="color:var(--text-secondary);font-size:14px;margin-bottom:var(--space-md)">For other NYC homeowners going through this. Everything we learned the hard way.</p>';
+      h+='<details><summary>Process Flowchart</summary><div class="guide-content"><ol class="flow-list">';
+      sg.flowchart.forEach(function(f){h+='<li class="flow-step"><span class="flow-step-icon">'+f.icon+'</span><span class="flow-step-text">'+f.text+'</span>'+(f.note?'<span class="flow-step-note">'+esc(f.note)+'</span>':'')+'</li>';});
+      h+='</ol><p style="margin-top:var(--space-md);padding:var(--space-md);background:rgba(0,122,255,.06);border-radius:var(--radius-xs);font-size:14px;color:var(--track-c)"><strong>Key insight:</strong> '+esc(sg.keyInsight)+'</p></div></details>';
+      h+='<details><summary>Who To Call</summary><div class="guide-content">';
+      sg.contacts.forEach(function(c){h+='<div class="contact-item"><div class="contact-name">'+esc(c.name)+'</div><div class="contact-phone">'+esc(c.phone)+'</div>'+(c.email?'<div class="contact-email">'+esc(c.email)+'</div>':'')+'<div class="contact-desc">'+esc(c.desc)+'</div></div>';});
+      h+='<p style="margin-top:var(--space-md);font-size:12px;color:var(--text-muted)">Hours: M–F 8:30 AM – 4:30 PM unless noted</p></div></details>';
+      h+='<details><summary>10 Things I Learned</summary><div class="guide-content">';
+      sg.tips.forEach(function(t,i){h+='<div class="tip-item"><div class="tip-number">'+String(i+1).padStart(2,'0')+'</div><span class="tip-title">'+esc(t.title)+'</span><span class="tip-body">'+esc(t.body)+'</span></div>';});
+      h+='</div></details>';document.getElementById('guide-slot').innerHTML=h;
+
+      // Property
+      var p=d.property;h='<h2 class="section-label" id="property">Property Details</h2><div class="card card--flush">';
+      h+='<div class="property-sub-header">Property</div>'+row('Address',p.address)+row('BIN',p.bin)+row('Block / Lot',p.blockLot)+row('Job Filing',p.jobFiling);
+      p.violations.forEach(function(v){
+        h+='<div class="property-sub-header">'+esc(v.label)+' <span style="color:var(--track-'+(v.statusColor==='green'?'a':'b')+');font-weight:700">'+esc(v.status)+'</span></div>';
+        h+=row('Summons',v.summons)+row('COC',v.coc)+row('Penalty',v.penalty);if(v.deadline)h+=row('Deadline',v.deadline);
+      });
+      h+='<div class="property-sub-header">Professionals</div>';p.professionals.forEach(function(pr){h+=row(pr.role,pr.name)});
+      h+='</div>';document.getElementById('property-slot').innerHTML=h;
+
+      // Footer
+      document.getElementById('footer-quote').innerHTML='\u201c'+esc(d.footer.quote)+'\u201d';
+      document.getElementById('footer-credit').innerHTML=d.footer.credit+'<br><a href="mailto:'+esc(d.footer.email)+'">'+esc(d.footer.email)+'</a>';
+      document.getElementById('last-updated').textContent=now.toLocaleDateString('en-US',fmt);
+    }
+  })();
   </script>
 </body>
 </html>
