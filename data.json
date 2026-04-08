@@ -7,9 +7,9 @@
   },
 
   "nextAction": {
-    "title": "🚨 Confirm GC civil penalty has been PAID",
-    "detail": "Per NYC Admin Code § 28-207.2.3, DOB will NOT rescind SWO until all civil penalties are paid — even if inspection passes. Ask Damian ASAP.",
-    "owner": "Allan / Damian"
+    "title": "🎉 Friday April 10: SWO Re-Inspection (8–10 AM)",
+    "detail": "Lenny Vicari inspecting 176 Johnson St. Pawel on-site. GC civil penalty CONFIRMED PAID ($15K, Mar 27). All known financial blockers cleared.",
+    "owner": "Pawel (on-site) / Allan"
   },
 
   "keyDates": [
@@ -23,7 +23,7 @@
     {
       "date": "2026-04-18",
       "label": "April 18 — ✅ MET",
-      "desc": "60-day cure filing window. COC filed April 3 — within window. This is a filing deadline, not approval. $5K+$1K/day penalty does NOT apply (that's §28-219.1, Class 1 only).",
+      "desc": "60-day COC filing deadline (§28-219.1). Both violations ARE Class 1 (confirmed BIS Apr 8). §28-219.1 applies, but penalty triggers on failure to FILE — COC filed April 3, within window. Deadline met.",
       "color": "green",
       "countdown": false
     },
@@ -67,11 +67,11 @@
   "penalties": [
     {
       "name": "Electrical Civil Penalty",
-      "detail": "Violation 39177537R · Mar 27",
+      "detail": "Violation 39177537R · Paid before Mar 19 · Invoice #1012213082",
       "amount": "$15,000",
       "amountNum": 15000,
       "status": "paid",
-      "who": "Allan & Charlie",
+      "who": "Damian (source of funds unclear)",
       "icon": "✅"
     },
     {
@@ -103,16 +103,16 @@
     },
     {
       "name": "GC Civil Penalty",
-      "detail": "39177526L · Review approved",
-      "amount": "TBD",
-      "amountNum": 0,
-      "status": "unknown",
-      "who": "Damian",
-      "icon": "❓"
+      "detail": "39177526L · Paid Mar 27 · Invoice #31789116",
+      "amount": "$15,000",
+      "amountNum": 15000,
+      "status": "paid",
+      "who": "Damian / Pawel",
+      "icon": "✅"
     },
     {
       "name": "60-Day Cure Window",
-      "detail": "✅ Met — COC filed April 3. $5K+$1K/day is §28-219.1 (Class 1 only, does not apply).",
+      "detail": "✅ Met — COC filed April 3. Both violations ARE Class 1, §28-219.1 applies, but penalty is for failure to FILE (not approve). Filing deadline met.",
       "amount": "N/A",
       "amountNum": 0,
       "status": "resolved",
@@ -137,10 +137,10 @@
 
   "blockers": [
     {
-      "name": "🚨 GC civil penalty payment (LEGAL REQUIREMENT)",
-      "detail": "Per NYC Admin Code § 28-207.2.3, DOB will NOT rescind SWO until all civil penalties are paid — even if inspection passes. Payment status UNKNOWN.",
-      "owner": "Damian (ASAP)",
-      "severity": "red"
+      "name": "✅ Civil penalties — BOTH CONFIRMED PAID",
+      "detail": "GC CP (39177526L, $15K) confirmed paid Mar 27 via CP_GC.pdf. Electrical CP (39177537R) confirmed paid by Damian Apr 8 email — \"CP for EL WWP was paid along with the filing fee.\" Payment proof attached to Damian's SWO rescind request and sent to OBM.",
+      "owner": "Resolved",
+      "severity": "green"
     },
     {
       "name": "Second COC approval (39177526L)",
@@ -198,7 +198,8 @@
     { "date": "Apr 8", "track": "c", "trackLabel": "C", "desc": "Allan emails OBM supervisor re: SWO rescission requirements.", "owner": "Allan" },
     { "date": "Apr 8", "track": "none", "trackLabel": "—", "desc": "Brooklyn Construction Enforcement: \"We have nothing to do with this.\" OBM is the only office for SWO rescission.", "owner": "Brooklyn Const. Enforcement" },
     { "date": "Apr 8", "track": "c", "trackLabel": "C", "desc": "<strong>Lenny Vicari (OBM Supervising Inspector) replies in 14 minutes</strong> — offers re-inspection Friday April 10, 8–10 AM.", "owner": "Lenny Vicari" },
-    { "date": "Apr 8", "track": "c", "trackLabel": "C", "desc": "Allan confirms Friday April 10, 8–10 AM. <strong>Pawel on-site (confirmed).</strong>", "owner": "Allan / Pawel" }
+    { "date": "Apr 8", "track": "c", "trackLabel": "C", "desc": "Allan confirms Friday April 10, 8–10 AM. <strong>Pawel on-site (confirmed).</strong>", "owner": "Allan / Pawel" },
+    { "date": "Apr 8", "track": "a-b", "trackLabel": "A + B", "desc": "<strong>Damian email (2:33 PM):</strong> Electrical CP (EL WWP) confirmed paid with filing fee. Payment proof attached to SWO rescind request — sent to Electrical SWO office and OBM. <strong>Both CPs now confirmed paid. Financial blockers for SWO rescission cleared.</strong>", "owner": "Damian" }
   ],
 
   "timelineTodo": [
@@ -217,10 +218,10 @@
   ],
 
   "team": [
-    { "initials": "AH", "name": "Allan Holmes", "role": "Owner", "status": "Waiting on Damian re: penalty payment. Inspection confirmed Friday." },
+    { "initials": "AH", "name": "Allan Holmes", "role": "Owner", "status": "Both CPs confirmed paid. Inspection Friday. All systems go." },
     { "initials": "CF", "name": "Charlie Filson-Dineen", "role": "Owner", "status": "Co-owner. Design decisions, CC'd on all threads" },
     { "initials": "PU", "name": "Pawel Uradominki", "role": "GC · QuestArt Construction", "status": "Waiting on SWO lift to resume work" },
-    { "initials": "DM", "name": "Damian Michalak", "role": "Expediter · Big Orange", "status": "Filed COCs, managing DOB. Key questions unanswered" },
+    { "initials": "DM", "name": "Damian Michalak", "role": "Expediter · Big Orange", "status": "Apr 8: Confirmed electrical CP paid. SWO rescind request filed with OBM, payment proof attached." },
     { "initials": "EP", "name": "Eugene Seungho Park", "role": "Architect · KYSH", "status": "Rev.1 drawings ready pending sign-off" },
     { "initials": "EW", "name": "Eric M. Wohl", "role": "Attorney · Fox Rothschild LLP", "status": "Deflected restart question to expediter" },
     { "initials": "BA", "name": "Blessing Anosike", "role": "Board Expediter · Jack Jaffa", "status": "20+ years with building" },
@@ -270,7 +271,7 @@
   },
 
   "openQuestions": [
-    { "q": "Has the GC civil penalty actually been PAID?", "why": "NYC Admin Code § 28-207.2.3 requires all civil penalties paid before SWO rescission. Review is APPROVED but payment is UNKNOWN.", "owner": "Damian", "severity": "red" },
+    { "q": "✅ RESOLVED: Have both civil penalties been paid?", "why": "GC CP confirmed via CP_GC.pdf (Apr 8). Electrical CP confirmed by Damian email (Apr 8, 2:33 PM). Both paid. Financial requirement for SWO rescission (§ 28-207.2.3) met.", "owner": "Resolved", "severity": "green" },
     { "q": "Were any work-against-SWO penalties issued?", "why": "§ 28-207.2.6 — $6K–$12K per violation. Must be paid before rescission. Unknown if any were issued.", "owner": "Damian", "severity": "red" },
     { "q": "Does the COC for 39177526L need to be approved before SWO can be rescinded?", "why": "Evidence suggests no — Lenny scheduled inspection before COC approved. But not explicitly confirmed.", "owner": "Lenny / Damian", "severity": "yellow" },
     { "q": "Can 6A resume after just 6A SWO rescind?", "why": "Attorney punted to expediter. If building-wide SWO must clear, timeline extends significantly.", "owner": "Damian", "severity": "red" },
@@ -281,13 +282,15 @@
     { "date": "Apr 8", "source": "Brooklyn Construction Enforcement", "intel": "\"We have nothing to do with this.\" SWO rescission is exclusively OBM.", "impact": "Eliminates Brooklyn CE as a path. OBM is the only office." },
     { "date": "Apr 8", "source": "Lenny Vicari (OBM)", "intel": "Responded to email in 14 minutes. Offered re-inspection Friday April 10. Did NOT mention needing COC approval first.", "impact": "Strongest signal yet that COC and SWO are independent tracks." },
     { "date": "Apr 8", "source": "AEU (3 calls)", "intel": "COC review is 4–5 weeks. Owner can go to 280 Broadway to push. Expediters CANNOT go in person.", "impact": "280 Broadway trip is owner-only. But may not be needed if SWO can be lifted without COC." },
+    { "date": "Apr 8", "source": "DOB rules research (1 RCNY §102-01, §28-219.1)", "intel": "April 18 'deadline' is actually the 60-day cure FILING window — already met (COC filed Apr 3). The $5K+$1K/day penalty is from §28-219.1, which applies only to Class 1 (immediately hazardous) violations. Our violation (39177526L) is Class 2. That penalty does NOT apply.", "impact": "April 18 is no longer a risk. May 6 OATH hearing is the real action date. 280 Broadway trip is about getting COC approved before May 6, not avoiding a penalty cliff." },
+    { "date": "Apr 8", "source": "Damian (Big Orange) email — 2:33 PM", "intel": "\"The CP for EL WWP was paid along with the filing fee. I attached the payment confirmation to my SWO rescind request and sent it to the Electrical SWO and then to the OBM.\"", "impact": "Electrical CP confirmed paid. Damian has already filed SWO rescind request with OBM, payment proof attached. Both civil penalties now confirmed paid — financial blockers cleared." },
     { "date": "Apr 7", "source": "DOB NOW portal", "intel": "GC civil penalty review (670218027) shows APPROVED. But 'approved' may mean review approved, not payment confirmed.", "impact": "Need Damian to confirm actual payment status." }
   ],
 
   "legalRequirements": {
     "title": "NYC Admin Code Requirements for SWO Rescission",
     "sections": [
-      { "code": "§ 28-207.2.3", "text": "All civil penalties must be PAID before SWO rescission.", "status": "UNKNOWN — GC penalty payment unconfirmed" },
+      { "code": "§ 28-207.2.3", "text": "All civil penalties must be PAID before SWO rescission.", "status": "✅ MET — Both CPs confirmed paid (GC: Mar 27, Electrical: confirmed Apr 8 by Damian)" },
       { "code": "§ 28-207.2.6", "text": "Work-against-SWO penalties ($6K–$12K each) must also be paid.", "status": "UNKNOWN — may not apply" },
       { "code": "§ 28-207.2", "text": "Commissioner must inspect and confirm conditions corrected.", "status": "SCHEDULED — April 10" }
     ]
