@@ -122,16 +122,16 @@
   ],
 
   "rent": {
-    "weeklyRate": 800,
+    "weeklyRate": 550,
     "startDate": "2026-03-02",
-    "description": "$800/week since first week of March. Should have moved in March 1 — SWO made that impossible.",
+    "description": "$550/week since first week of March. Should have moved in March 1 — SWO made that impossible.",
     "weeks": [
-      { "label": "Week 1", "dates": "Mar 2–8", "amount": 800 },
-      { "label": "Week 2", "dates": "Mar 9–15", "amount": 800 },
-      { "label": "Week 3", "dates": "Mar 16–22", "amount": 800 },
-      { "label": "Week 4", "dates": "Mar 23–29", "amount": 800 },
-      { "label": "Week 5", "dates": "Mar 30–Apr 5", "amount": 800 },
-      { "label": "Week 6", "dates": "Apr 6–12", "amount": 800 }
+      { "label": "Week 1", "dates": "Mar 2–8", "amount": 550 },
+      { "label": "Week 2", "dates": "Mar 9–15", "amount": 550 },
+      { "label": "Week 3", "dates": "Mar 16–22", "amount": 550 },
+      { "label": "Week 4", "dates": "Mar 23–29", "amount": 550 },
+      { "label": "Week 5", "dates": "Mar 30–Apr 5", "amount": 550 },
+      { "label": "Week 6", "dates": "Apr 6–12", "amount": 550 }
     ]
   },
 
@@ -300,7 +300,7 @@
     "title": "Displacement Cost (Running Total)",
     "weeklyRent": 800,
     "startDate": "2026-03-02",
-    "note": "Should have moved in March 1. SWO made that impossible. Paying $800/week for current apartment we can't leave."
+    "note": "Should have moved in March 1. SWO made that impossible. Paying $550/week for current apartment we can't leave."
   },
 
   "property": {
