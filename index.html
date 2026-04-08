@@ -185,8 +185,7 @@
       });
       h+='</div>';
       h+='<div class="card card--flush"><div class="numbers-item" style="padding-top:var(--space-lg)"><span class="numbers-label" style="font-weight:600">Total Out-of-Pocket Cost</span><span class="numbers-value numbers-value--red">$'+oopTotal.toLocaleString()+'</span></div>';
-      h+='<div class="numbers-item"><span class="numbers-label">Estimated Construction Cost</span><span class="numbers-value">'+esc(d.property.constructionCost)+'</span></div>';
-      h+='<div class="numbers-item" style="padding-bottom:var(--space-lg)"><span class="numbers-label" style="font-size:13px;color:var(--text-muted)">Construction cost is separate — total above is penalties + displacement rent only</span><span class="numbers-value"></span></div></div>';
+      h+='<div class="numbers-item" style="padding-bottom:var(--space-lg)"><span class="numbers-label" style="font-size:13px;color:var(--text-muted)">Penalties + displacement rent paid by Allan &amp; Charlie</span><span class="numbers-value"></span></div></div>';
       document.getElementById('transactions-slot').innerHTML=h;
 
       // Blockers
