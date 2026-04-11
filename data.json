@@ -1,24 +1,25 @@
 {
   "status": {
-    "headline": "🎉 SWO Re-Inspection FRIDAY April 10, 8–10 AM",
+    "headline": "🎉 SWO RESCINDED — April 10, 2026. 52 days of hell, officially over.",
     "swoDate": "2026-02-17",
-    "nextDeadline": "Apr 10",
-    "nextDeadlineLabel": "Re-inspection"
+    "swoRescindedDate": "2026-04-10",
+    "nextDeadline": "Apr 13",
+    "nextDeadlineLabel": "Construction restarts"
   },
 
   "nextAction": {
-    "title": "🎉 Friday April 10: SWO Re-Inspection (8–10 AM)",
-    "detail": "Lenny Vicari inspecting 176 Johnson St. Pawel on-site. GC civil penalty CONFIRMED PAID ($15K, Mar 27). All known financial blockers cleared.",
-    "owner": "Pawel (on-site) / Allan"
+    "title": "🎉 SWO Rescinded — Construction Restarts Monday April 13",
+    "detail": "Damian confirmed at 3:39 PM: SWO for construction and electrical WWP has been rescinded. DOB BIS shows complaint #3931133 status RES (Resolved), disposition L1. 52 days from issuance to rescission.",
+    "owner": "Pawel / Allan"
   },
 
   "keyDates": [
     {
       "date": "2026-04-10",
-      "label": "April 10 — 8–10 AM",
-      "desc": "🎉 SWO Re-Inspection. Lenny Vicari (Supervising Inspector) visiting 176 Johnson St. Pawel on-site.",
+      "label": "April 10 — ✅ PASSED",
+      "desc": "🎉 SWO Re-Inspection PASSED. Lenny Vicari inspected 176 Johnson St. SWO formally rescinded. Complaint #3931133 → RES (Resolved), disposition L1.",
       "color": "green",
-      "countdown": true
+      "countdown": false
     },
     {
       "date": "2026-04-18",
@@ -51,16 +52,16 @@
     {
       "date": "2026-05-31",
       "label": "May 31",
-      "desc": "Work permit #429322759 expires. Cannot use until SWO lifted.",
+      "desc": "Work permit #429322759 expires. SWO lifted — permit now active.",
       "color": "blue",
       "countdown": true
     },
     {
-      "date": null,
-      "label": "TBD",
-      "desc": "Construction resumes — the goal.",
+      "date": "2026-04-13",
+      "label": "April 13 — 🏗️ RESTART",
+      "desc": "Construction resumes. Pawel targeting Monday April 13 as restart date.",
       "color": "green",
-      "countdown": false
+      "countdown": true
     }
   ],
 
@@ -138,33 +139,33 @@
   "blockers": [
     {
       "name": "✅ Civil penalties — BOTH CONFIRMED PAID",
-      "detail": "GC CP (39177526L, $15K) confirmed paid Mar 27 via CP_GC.pdf. Electrical CP (39177537R) confirmed paid by Damian Apr 8 email — \"CP for EL WWP was paid along with the filing fee.\" Payment proof attached to Damian's SWO rescind request and sent to OBM.",
+      "detail": "GC CP (39177526L, $15K) confirmed paid Mar 27 via CP_GC.pdf. Electrical CP (39177537R) confirmed paid by Damian Apr 8 email.",
+      "owner": "Resolved",
+      "severity": "green"
+    },
+    {
+      "name": "✅ SWO rescission inspection — PASSED",
+      "detail": "April 10, 2026. Lenny Vicari inspected. SWO formally rescinded. Complaint #3931133 → RES (Resolved), disposition L1.",
+      "owner": "Resolved",
+      "severity": "green"
+    },
+    {
+      "name": "✅ SWO RESCINDED — Construction can resume",
+      "detail": "Damian confirmed 3:39 PM April 10. DOB BIS updated. 52 days from issuance to rescission.",
       "owner": "Resolved",
       "severity": "green"
     },
     {
       "name": "Second COC approval (39177526L)",
-      "detail": "4–5 week AEU review from April 3. May NOT be required for SWO rescission (independent tracks). 280 Broadway trip ON HOLD.",
-      "owner": "AEU — priority TBD",
+      "detail": "Still in AEU review (submitted April 3, ~4–5 weeks). NOT required for SWO rescission (confirmed — SWO lifted without it). Still needed for May 6 OATH hearing.",
+      "owner": "AEU",
       "severity": "yellow"
     },
     {
-      "name": "SWO rescission inspection",
-      "detail": "SCHEDULED — Friday April 10, 8–10 AM. Lenny Vicari (Supervising Inspector). Pawel on-site ✔",
-      "owner": "Lenny Vicari / Pawel",
-      "severity": "green"
-    },
-    {
-      "name": "Can 6A restart with just 6A SWO rescind?",
-      "detail": "Attorney punted to expediter. Needs answer from Damian.",
-      "owner": "Damian",
-      "severity": "red"
-    },
-    {
-      "name": "DOB inspector approval of new permit",
-      "detail": "Blocked until SWO lifted. Permit expires May 31.",
-      "owner": "DOB",
-      "severity": "gray"
+      "name": "May 6 OATH hearing (39177526L)",
+      "detail": "ECB hearing still scheduled. COC approval before this date would strengthen position.",
+      "owner": "Allan",
+      "severity": "yellow"
     }
   ],
 
@@ -199,36 +200,35 @@
     { "date": "Apr 8", "track": "none", "trackLabel": "—", "desc": "Brooklyn Construction Enforcement: \"We have nothing to do with this.\" OBM is the only office for SWO rescission.", "owner": "Brooklyn Const. Enforcement" },
     { "date": "Apr 8", "track": "c", "trackLabel": "C", "desc": "<strong>Lenny Vicari (OBM Supervising Inspector) replies in 14 minutes</strong> — offers re-inspection Friday April 10, 8–10 AM.", "owner": "Lenny Vicari" },
     { "date": "Apr 8", "track": "c", "trackLabel": "C", "desc": "Allan confirms Friday April 10, 8–10 AM. <strong>Pawel on-site (confirmed).</strong>", "owner": "Allan / Pawel" },
-    { "date": "Apr 8", "track": "a-b", "trackLabel": "A + B", "desc": "<strong>Damian email (2:33 PM):</strong> Electrical CP (EL WWP) confirmed paid with filing fee. Payment proof attached to SWO rescind request — sent to Electrical SWO office and OBM. <strong>Both CPs now confirmed paid. Financial blockers for SWO rescission cleared.</strong>", "owner": "Damian" }
+    { "date": "Apr 8", "track": "a-b", "trackLabel": "A + B", "desc": "<strong>Damian email (2:33 PM):</strong> Electrical CP (EL WWP) confirmed paid with filing fee. Payment proof attached to SWO rescind request — sent to Electrical SWO office and OBM. <strong>Both CPs now confirmed paid. Financial blockers for SWO rescission cleared.</strong>", "owner": "Damian" },
+    { "date": "Apr 9", "track": "c", "trackLabel": "C", "desc": "<strong>Damian (6:17 AM):</strong> Person on-site during inspection should ask the DOB inspector for the formal rescind order. DOB usually removes red banner from property profile same day, but can take longer.", "owner": "Damian" },
+    { "date": "Apr 9", "track": "c", "trackLabel": "C", "desc": "<strong>Pawel (7:05 AM):</strong> \"I will be there and will ask.\" — Pawel confirmed for inspection and briefed to request formal rescind order from inspector.", "owner": "Pawel" },
+    { "date": "Apr 10", "track": "d", "trackLabel": "D", "desc": "<strong>Eugene (6:09 AM):</strong> Sent Pawel stamped DOBNOW drawings before inspection window.", "owner": "Eugene" },
+    { "date": "Apr 10", "track": "c", "trackLabel": "C", "desc": "<strong>Pawel (3:03 PM):</strong> \"All good.\" Inspection went well. Damian checking DOB system for SWO removal.", "owner": "Pawel" },
+    { "date": "Apr 10", "track": "c", "trackLabel": "C", "desc": "<strong>🎉 Damian (3:39 PM):</strong> \"The SWO for the construction and electrical WWP has been rescinded.\" DOB BIS: Complaint #3931133 → Status RES (Resolved), Disposition L1. <strong>SWO officially lifted. 52 days of hell, over.</strong>", "owner": "Damian" }
   ],
 
   "timelineTodo": [
-    { "step": 1, "track": "b", "trackLabel": "B", "status": "urgent", "desc": "Confirm with Damian: has GC civil penalty been PAID? Law requires this before SWO rescission (§ 28-207.2.3).", "owner": "Allan / Damian", "dep": null },
-    { "step": 2, "track": "b", "trackLabel": "B", "status": "unanswered", "desc": "Were any work-against-SWO penalties issued? ($6K–$12K each, must be paid before rescission per § 28-207.2.6.)", "owner": "Allan / Damian", "dep": null },
-    { "step": 3, "track": "b-c", "trackLabel": "B + C", "status": "unanswered", "desc": "Does the COC for 39177526L need to be approved before SWO can be rescinded? (Evidence suggests no — but not confirmed.)", "owner": "Lenny / Damian", "dep": null },
-    { "step": 4, "track": "b", "trackLabel": "B", "status": "pending", "desc": "Second COC approved by AEU (COC0395691 for 39177526L).", "owner": "AEU", "dep": "4–5 week review from April 3. May not block SWO rescission." },
-    { "step": 5, "track": "b", "trackLabel": "B", "status": "on-hold", "desc": "Go to 280 Broadway with deed + ID to push COC review. On hold — may not be needed if COC isn't required for SWO rescission.", "owner": "Allan", "dep": null },
-    { "step": 6, "track": "c", "trackLabel": "C", "status": "done", "desc": "OBM supervisor (Lenny Vicari) responded in 14 minutes.", "owner": "Lenny Vicari", "dep": null },
-    { "step": 7, "track": "b-c", "trackLabel": "B + C", "status": "likely-no", "desc": "Does COC need approval before SWO can be lifted? Evidence says no (inspection scheduled before COC approved). Needs explicit confirmation from Lenny or Damian.", "owner": "Lenny / Damian", "dep": null },
-    { "step": 8, "track": "c", "trackLabel": "C", "status": "done", "desc": "🎉 Inspection scheduled: Friday April 10, 8–10 AM. Lenny Vicari visiting 176 Johnson St.", "owner": "Lenny Vicari", "dep": null },
-    { "step": 9, "track": "c", "trackLabel": "C", "status": "friday", "desc": "DOB inspector visits — SWO rescinded for 6A.", "owner": "Lenny Vicari", "dep": "April 10, 8–10 AM" },
-    { "step": 10, "track": "d", "trackLabel": "D", "status": "unanswered", "desc": "Can 6A resume after just 6A SWO rescind?", "owner": "Damian", "dep": null },
-    { "step": 11, "track": "d", "trackLabel": "D", "status": "blocked", "desc": "DOB inspection of new work permit.", "owner": "DOB", "dep": "Blocked by #9" },
-    { "step": 12, "track": "d", "trackLabel": "D", "status": "goal", "desc": "CONSTRUCTION RESUMES", "owner": "Pawel — THE GOAL", "dep": null }
+    { "step": 1, "track": "b", "trackLabel": "B", "status": "done", "desc": "✅ Both civil penalties confirmed paid.", "owner": "Resolved", "dep": null },
+    { "step": 2, "track": "c", "trackLabel": "C", "status": "done", "desc": "✅ SWO rescission inspection passed — April 10.", "owner": "Lenny Vicari", "dep": null },
+    { "step": 3, "track": "c", "trackLabel": "C", "status": "done", "desc": "🎉 SWO RESCINDED — Complaint #3931133 → RES, L1.", "owner": "Damian / DOB", "dep": null },
+    { "step": 4, "track": "b", "trackLabel": "B", "status": "pending", "desc": "Second COC approved by AEU (COC0395691 for 39177526L). Not required for SWO but needed for May 6 OATH hearing.", "owner": "AEU", "dep": "4–5 week review from April 3" },
+    { "step": 5, "track": "b", "trackLabel": "B", "status": "upcoming", "desc": "May 6 OATH hearing — ECB hearings for both violations.", "owner": "Allan", "dep": null },
+    { "step": 6, "track": "d", "trackLabel": "D", "status": "upcoming", "desc": "Construction restarts — Monday April 13.", "owner": "Pawel", "dep": null }
   ],
 
   "team": [
-    { "initials": "AH", "name": "Allan Holmes", "role": "Owner", "status": "Both CPs confirmed paid. Inspection Friday. All systems go." },
+    { "initials": "AH", "name": "Allan Holmes", "role": "Owner", "status": "🎉 SWO rescinded. Construction restarts Monday." },
     { "initials": "CF", "name": "Charlie Filson-Dineen", "role": "Owner", "status": "Co-owner. Design decisions, CC'd on all threads" },
-    { "initials": "PU", "name": "Pawel Uradominki", "role": "GC · QuestArt Construction", "status": "Waiting on SWO lift to resume work" },
-    { "initials": "DM", "name": "Damian Michalak", "role": "Expediter · Big Orange", "status": "Apr 8: Confirmed electrical CP paid. SWO rescind request filed with OBM, payment proof attached." },
-    { "initials": "EP", "name": "Eugene Seungho Park", "role": "Architect · KYSH", "status": "Rev.1 drawings ready pending sign-off" },
+    { "initials": "PU", "name": "Pawel Uradominki", "role": "GC · QuestArt Construction", "status": "🏗️ Construction restarts Monday April 13. Inspection passed." },
+    { "initials": "DM", "name": "Damian Michalak", "role": "Expediter · Big Orange", "status": "🎉 Confirmed SWO rescinded Apr 10 at 3:39 PM." },
+    { "initials": "EP", "name": "Eugene Seungho Park", "role": "Architect · KYSH", "status": "Sent stamped DOBNOW drawings Apr 10. Rev.1 drawings ready pending sign-off." },
     { "initials": "EW", "name": "Eric M. Wohl", "role": "Attorney · Fox Rothschild LLP", "status": "Deflected restart question to expediter" },
     { "initials": "BA", "name": "Blessing Anosike", "role": "Board Expediter · Jack Jaffa", "status": "20+ years with building" },
     { "initials": "BH", "name": "Brian Hausman", "role": "Property Mgr · TKR Property Services", "status": "Building access, permit posting" },
     { "initials": "WB", "name": "Wojciech Baldyga", "role": "Electrician · Modern Voltage NYC", "status": "Completed electrical corrections" },
     { "initials": "AM", "name": "Agnieszka Muczynski", "role": "COC Submitter · Unknown (Big Orange?)", "status": "Submitted COC on April 3. Identity unconfirmed" },
-    { "initials": "LV", "name": "Lenny Vicari", "role": "Supervising Inspector · Office of Strategic Inspections, NYC DOB", "status": "🎉 Re-inspection scheduled: Friday April 10, 8–10 AM" }
+    { "initials": "LV", "name": "Lenny Vicari", "role": "Supervising Inspector · Office of Strategic Inspections, NYC DOB", "status": "✅ Inspection complete Apr 10. SWO rescinded." }
   ],
 
   "survivalGuide": {
@@ -246,7 +246,7 @@
       { "icon": "🔍", "text": "DOB inspector visits → SWO lifted" },
       { "icon": "🏗️", "text": "<strong>Construction resumes</strong>" }
     ],
-    "keyInsight": "COC approval and SWO rescission may be INDEPENDENT tracks. You might not need the COC approved before the SWO can be lifted. Confirm with OBM.",
+    "keyInsight": "COC approval and SWO rescission ARE independent tracks. We got our SWO rescinded on April 10 without the second COC being approved. Push both simultaneously — don't wait for one to complete the other.",
     "contacts": [
       { "name": "AEU (Administrative Enforcement Unit)", "phone": "(212) 393-2405", "email": null, "desc": "COC review status, civil penalty status" },
       { "name": "OBM (Office of Building Marshal)", "phone": "(212) 393-2930", "email": "OBMSWO@buildings.nyc.gov", "desc": "SWO rescission, inspection scheduling" },
@@ -273,8 +273,8 @@
   "openQuestions": [
     { "q": "✅ RESOLVED: Have both civil penalties been paid?", "why": "GC CP confirmed via CP_GC.pdf (Apr 8). Electrical CP confirmed by Damian email (Apr 8, 2:33 PM). Both paid. Financial requirement for SWO rescission (§ 28-207.2.3) met.", "owner": "Resolved", "severity": "green" },
     { "q": "Were any work-against-SWO penalties issued?", "why": "§ 28-207.2.6 — $6K–$12K per violation. Must be paid before rescission. Unknown if any were issued.", "owner": "Damian", "severity": "red" },
-    { "q": "Does the COC for 39177526L need to be approved before SWO can be rescinded?", "why": "Evidence suggests no — Lenny scheduled inspection before COC approved. But not explicitly confirmed.", "owner": "Lenny / Damian", "severity": "yellow" },
-    { "q": "Can 6A resume after just 6A SWO rescind?", "why": "Attorney punted to expediter. If building-wide SWO must clear, timeline extends significantly.", "owner": "Damian", "severity": "red" },
+    { "q": "✅ RESOLVED: Does the COC for 39177526L need to be approved before SWO can be rescinded?", "why": "CONFIRMED NO — SWO rescinded April 10 without COC approval. COC still in AEU review. Independent tracks confirmed.", "owner": "Resolved", "severity": "green" },
+    { "q": "✅ RESOLVED: Can 6A resume after just 6A SWO rescind?", "why": "YES — SWO rescinded for 6A on April 10. Construction restarts Monday April 13.", "owner": "Resolved", "severity": "green" },
     { "q": "Who is Agnieszka Muczynski?", "why": "She submitted the COC on April 3, not Damian. Is she at Big Orange? Does this affect anything?", "owner": "Damian", "severity": "gray" }
   ],
 
@@ -284,6 +284,10 @@
     { "date": "Apr 8", "source": "AEU (3 calls)", "intel": "COC review is 4–5 weeks. Owner can go to 280 Broadway to push. Expediters CANNOT go in person.", "impact": "280 Broadway trip is owner-only. But may not be needed if SWO can be lifted without COC." },
     { "date": "Apr 8", "source": "DOB rules research (1 RCNY §102-01, §28-219.1)", "intel": "April 18 'deadline' is actually the 60-day cure FILING window — already met (COC filed Apr 3). The $5K+$1K/day penalty is from §28-219.1, which applies only to Class 1 (immediately hazardous) violations. Our violation (39177526L) is Class 2. That penalty does NOT apply.", "impact": "April 18 is no longer a risk. May 6 OATH hearing is the real action date. 280 Broadway trip is about getting COC approved before May 6, not avoiding a penalty cliff." },
     { "date": "Apr 8", "source": "Damian (Big Orange) email — 2:33 PM", "intel": "\"The CP for EL WWP was paid along with the filing fee. I attached the payment confirmation to my SWO rescind request and sent it to the Electrical SWO and then to the OBM.\"", "impact": "Electrical CP confirmed paid. Damian has already filed SWO rescind request with OBM, payment proof attached. Both civil penalties now confirmed paid — financial blockers cleared." },
+    { "date": "Apr 9", "source": "Damian (Big Orange) email — 6:17 AM + Pawel email — 7:05 AM", "intel": "Damian: on-site person should ask DOB inspector for formal rescind order — DOB typically removes red banner same day. Pawel replied: 'I will be there and will ask.'", "impact": "Pawel is coordinated and ready. The key action for tomorrow is Pawel explicitly requesting the formal rescind order from Lenny during the inspection." },
+    { "date": "Apr 10", "source": "Pawel (iMessage) — 3:03 PM", "intel": "\"All good.\" Inspection went well. Damian checking DOB system for SWO removal.", "impact": "Inspection passed. Awaiting DOB system update." },
+    { "date": "Apr 10", "source": "Damian (email) — 3:39 PM", "intel": "\"The SWO for the construction and electrical WWP has been rescinded.\" Attached DOB BIS screenshot: Complaint #3931133, Status RES (Resolved), Disposition L1.", "impact": "🎉 SWO officially rescinded. 52 days from issuance to resolution. Construction can resume Monday April 13." },
+    { "date": "Apr 10", "source": "Eugene (email) — 6:09 AM", "intel": "Sent Pawel stamped DOBNOW drawings before inspection window.", "impact": "Drawings ready for construction restart." },
     { "date": "Apr 7", "source": "DOB NOW portal", "intel": "GC civil penalty review (670218027) shows APPROVED. But 'approved' may mean review approved, not payment confirmed.", "impact": "Need Damian to confirm actual payment status." }
   ],
 
@@ -292,7 +296,7 @@
     "sections": [
       { "code": "§ 28-207.2.3", "text": "All civil penalties must be PAID before SWO rescission.", "status": "✅ MET — Both CPs confirmed paid (GC: Mar 27, Electrical: confirmed Apr 8 by Damian)" },
       { "code": "§ 28-207.2.6", "text": "Work-against-SWO penalties ($6K–$12K each) must also be paid.", "status": "UNKNOWN — may not apply" },
-      { "code": "§ 28-207.2", "text": "Commissioner must inspect and confirm conditions corrected.", "status": "SCHEDULED — April 10" }
+      { "code": "§ 28-207.2", "text": "Commissioner must inspect and confirm conditions corrected.", "status": "✅ MET — Inspection passed April 10. SWO rescinded." }
     ]
   },
 
@@ -320,12 +324,12 @@
       },
       {
         "label": "Construction Violation",
-        "status": "ACTIVE",
+        "status": "SWO RESCINDED — COC still in review",
         "statusColor": "yellow",
         "summons": "39177526L",
-        "coc": "COC0395691 — In Review",
-        "penalty": "Review approved, payment unknown",
-        "deadline": "May 6, 2026 (OATH hearing). Cure filing window (April 18) already met."
+        "coc": "COC0395691 — In Review (AEU)",
+        "penalty": "$15,000 paid",
+        "deadline": "May 6, 2026 (OATH hearing). SWO rescinded April 10 without COC approval."
       }
     ],
     "professionals": [
